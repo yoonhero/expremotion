@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Auth from "../routes/Auth";
+import SearchUser from "../routes/Follow";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Navigation from "./Navigation";
@@ -30,6 +31,9 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
             </Route>
             <Route exact path='/profile'>
               <Profile userObj={userObj} refreshUser={refreshUser} />
+            </Route>
+            <Route exact path='/search'>
+              <SearchUser />
             </Route>
           </div>
         ) : (

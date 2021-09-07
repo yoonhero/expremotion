@@ -35,6 +35,11 @@ const Navigation = ({ userObj }) => (
           </span>
         </Link>
       </li>
+      <li>
+        <Link to='/search'>
+          <span>Search</span>
+        </Link>
+      </li>
     </ul>
   </nav>
 );

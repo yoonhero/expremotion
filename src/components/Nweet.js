@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { dbService, storageService } from "../fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { createAvatar } from "@dicebear/avatars";
-import * as style from "@dicebear/croodles-neutral";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -86,7 +84,9 @@ const Nweet = ({ nweetObj, isOwner }) => {
             }
           />
           <h4>{nweetObj.text}</h4>
-          {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
+          {nweetObj.attachmentUrl && (
+            <img width={200} src={nweetObj.attachmentUrl} />
+          )}
           {isOwner && (
             <div class='nweet__actions'>
               <span onClick={onDeleteClick}>
