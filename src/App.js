@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AppRouter from "./components/Router";
-import { authService } from "./fbase";
+import { authService, firebaseInstance } from "./fbase";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -8,17 +8,26 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
+        console.log(user.uid);
         setUserObj({
           displayName: user.displayName,
           uid: user.uid,
           updateProfile: (args) => user.updateProfile(args),
         });
+        // console.log(user);
+        // var updates = {};
+        // updates["/users/" + user.uid] = {
+        //   username: user?.displayName,
+        //   email: user?.email,
+        // };
+        // firebaseInstance.database().ref().update(updates);
       } else {
         setUserObj(null);
       }
       setInit(true);
     });
   }, []);
+
   const refreshUser = () => {
     const user = authService.currentUser;
     setUserObj({

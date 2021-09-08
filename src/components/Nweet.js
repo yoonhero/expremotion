@@ -19,12 +19,12 @@ const Nweet = ({ nweetObj, isOwner }) => {
 
   useEffect(() => {
     dbService.collection("profile").onSnapshot((snapshot) => {
-      const profileAvatar = snapshot.docs.map((doc) => {
+      snapshot.docs.map((doc) => {
         if (doc.data().id == nweetObj.creatorId) {
-          return doc.data().attachmentUrl;
+          setAvatar(doc.data().attachmentUrl);
+          return;
         }
       });
-      setAvatar(profileAvatar);
     });
   }, []);
 

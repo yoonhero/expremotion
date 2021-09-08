@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { dbService } from "../fbase";
+import { dbService, firebaseInstance, realtimeDatabase } from "../fbase";
 import Nweet from "../components/Nweet";
 import NweetFactory from "../components/NweetFactory";
 
@@ -15,6 +15,12 @@ const Home = ({ userObj }) => {
           ...doc.data(),
         }));
         setNweets(nweetArray);
+      });
+
+    realtimeDatabase
+      .ref("users/1234")
+      .update({ username: userObj.displayName }, (err) => {
+        console.log(err);
       });
   }, []);
   return (

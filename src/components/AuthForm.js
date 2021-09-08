@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { authService } from "../fbase";
+import { authService, firebaseInstance } from "../fbase";
 
 const inputStyles = {};
 const AuthForm = () => {
@@ -20,10 +20,14 @@ const AuthForm = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
+      let data;
       if (newAccount) {
-        await authService.createUserWithEmailAndPassword(email, password);
+        data = await authService.createUserWithEmailAndPassword(
+          email,
+          password
+        );
       } else {
-        await authService.signInWithEmailAndPassword(email, password);
+        data = await authService.signInWithEmailAndPassword(email, password);
       }
     } catch (error) {
       setError(error.message);
