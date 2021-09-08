@@ -18,10 +18,8 @@ const Home = ({ userObj }) => {
       });
 
     realtimeDatabase
-      .ref("users/1234")
-      .update({ username: userObj.displayName }, (err) => {
-        console.log(err);
-      });
+      .ref("users/" + userObj.uid)
+      .update({ username: userObj.displayName });
   }, []);
   return (
     <div className='container'>

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { authService, dbService, storageService } from "../fbase";
+import {
+  authService,
+  dbService,
+  realtimeDatabase,
+  storageService,
+} from "../fbase";
 import { useHistory } from "react-router-dom";
 
 export default ({ refreshUser, userObj }) => {
@@ -8,15 +13,27 @@ export default ({ refreshUser, userObj }) => {
   const [attachment, setAttachment] = useState("");
   let profileImgUrl = "";
   useEffect(() => {
-    dbService
-      .collection("profile")
-      .doc(userObj.uid)
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          profileImgUrl = doc.data().attachmentUrl;
-          setAttachment(profileImgUrl);
-        }
+    // dbService
+    //   .collection("profile")
+    //   .doc(userObj.uid)
+    //   .get()
+    //   .then(function (doc) {
+    //     if (doc.exists) {
+    //       profileImgUrl = doc.data().attachmentUrl;
+    //       setAttachment(profileImgUrl);
+    //     }
+    //   });
+
+    realtimeDatabase
+      .ref("users/" + userObj.uid)
+      .once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          var childKey = childSnapshot.key;
+          var childData = childSnapshot.val();
+          if (childKey === "avatar") {
+            setAttachment(childData);
+          }
+        });
       });
   }, []);
   const onLogOutClick = () => {
@@ -47,11 +64,14 @@ export default ({ refreshUser, userObj }) => {
       await dbService.doc(`profile/${userObj.uid}`).delete();
     }
 
-    const profileArray = {
-      id: userObj.uid,
-      attachmentUrl,
-    };
-    await dbService.collection("profile").doc(userObj.uid).set(profileArray);
+    // const profileArray = {
+    //   id: userObj.uid,
+    //   attachmentUrl,
+    // };
+    await realtimeDatabase
+      .ref(`users/${userObj.uid}`)
+      .update({ avatar: attachmentUrl });
+    // await dbService.collection("profile").doc(userObj.uid).set(profileArray);
     history.push("/");
   };
   const onFileChange = (event) => {
