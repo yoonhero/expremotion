@@ -62,15 +62,15 @@ export default ({ refreshUser, userObj }) => {
       const response = await attachmentRef.putString(attachment, "data_url");
       attachmentUrl = await response.ref.getDownloadURL();
       await dbService.doc(`profile/${userObj.uid}`).delete();
+      await realtimeDatabase
+        .ref(`users/${userObj.uid}`)
+        .update({ avatar: attachmentUrl });
     }
 
     // const profileArray = {
     //   id: userObj.uid,
     //   attachmentUrl,
     // };
-    await realtimeDatabase
-      .ref(`users/${userObj.uid}`)
-      .update({ avatar: attachmentUrl });
     // await dbService.collection("profile").doc(userObj.uid).set(profileArray);
     history.push("/");
   };

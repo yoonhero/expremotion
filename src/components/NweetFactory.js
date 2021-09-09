@@ -7,6 +7,11 @@ import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [attachment, setAttachment] = useState("");
+  const [emotion, setEmotion] = useState("");
+
+  const onChangeEmotion = (event) => {
+    setEmotion(event.target.value);
+  };
 
   const onSubmit = async (event) => {
     if (nweet === "") {
@@ -27,6 +32,7 @@ const NweetFactory = ({ userObj }) => {
       creatorId: userObj.uid,
       attachmentUrl,
       username: userObj.displayName,
+      emotion,
     };
     await dbService.collection(userObj.uid).add(nweetObj);
     setNweet("");
@@ -79,6 +85,12 @@ const NweetFactory = ({ userObj }) => {
           opacity: 0,
         }}
       />
+      <select value={emotion} onChange={onChangeEmotion}>
+        <option value='happy'>happy</option>
+        <option value='sad'>sad</option>
+        <option value='soso'>soso</option>
+        <option value='angry'>angry</option>
+      </select>
       {attachment && (
         <div className='factoryForm__attachment'>
           <img
