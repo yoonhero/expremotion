@@ -24,6 +24,7 @@ const Home = ({ userObj }) => {
       await dbService
         .collection(follow)
         .orderBy("createdAt", "desc")
+        .limit(10)
         .onSnapshot((snapshot) => {
           const nweetArray = snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -56,6 +57,7 @@ const Home = ({ userObj }) => {
     await dbService
       .collection(userObj.uid)
       .orderBy("createdAt", "desc")
+      .limit(10)
       .onSnapshot((snapshot) => {
         const nweetArray = snapshot.docs.map((doc) => ({
           id: doc.id,

@@ -35,6 +35,7 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
 
     await realtimeDatabase.ref(`users/${userObj.uid}/follow`).update(newFollow);
   };
+
   return (
     <div key={uid}>
       <img
