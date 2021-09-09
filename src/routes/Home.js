@@ -6,8 +6,38 @@ import NweetFactory from "../components/NweetFactory";
 const Home = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
 
+  const NweetsHook = (snapshot) => {
+    const nweetArray = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    setNweets((followNweet) => {
+      let allNweets = [...followNweet, ...nweetArray];
+      let sorted = allNweets.sort(function (a, b) {
+        return b.createdAt - a.createdAt;
+      });
+      // let uniqueArray = sorted.filter(function (item, pos) {
+      //   return sorted.indexOf(item) == pos;
+      // });
+
+      let uniqueArr = [];
+      let unq = [];
+      sorted.forEach((element) => {
+        if (!uniqueArr.includes(element.id)) {
+          uniqueArr.push(element.id);
+          unq.push(element);
+        }
+      });
+
+      return unq;
+    });
+  };
+
   useEffect(async () => {
     setNweets([]);
+
+    // find user's follower
     let follows = [];
     await realtimeDatabase
       .ref(`users/${userObj.uid}/follow`)
@@ -17,6 +47,7 @@ const Home = ({ userObj }) => {
         });
       });
 
+    // other people feeds
     follows.map(async (follow) => {
       if (follow === userObj.uid) {
         return;
@@ -25,68 +56,15 @@ const Home = ({ userObj }) => {
         .collection(follow)
         .orderBy("createdAt", "desc")
         .limit(10)
-        .onSnapshot((snapshot) => {
-          const nweetArray = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-
-          setNweets((followNweet) => {
-            let allNweets = [...followNweet, ...nweetArray];
-            let sorted = allNweets.sort(function (a, b) {
-              return b.createdAt - a.createdAt;
-            });
-            // let uniqueArray = sorted.filter(function (item, pos) {
-            //   return sorted.indexOf(item) == pos;
-            // });
-
-            let uniqueArr = [];
-            let unq = [];
-            sorted.forEach((element) => {
-              if (!uniqueArr.includes(element.id)) {
-                uniqueArr.push(element.id);
-                unq.push(element);
-              }
-            });
-
-            return unq;
-          });
-        });
+        .onSnapshot((snapshot) => NweetsHook(snapshot));
     });
 
+    // my feeds
     await dbService
       .collection(userObj.uid)
       .orderBy("createdAt", "desc")
       .limit(10)
-      .onSnapshot((snapshot) => {
-        const nweetArray = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setNweets((followNweet) => {
-          let allNweets = [...followNweet, ...nweetArray];
-          let sorted = allNweets.sort(function (a, b) {
-            return b.createdAt - a.createdAt;
-          });
-          // var uniq = sorted.reduce(function (a, b) {
-          //   if (a.indexOf(b) < 0) a.push(b);
-          //   return a;
-          // }, []);
-          // const uniq = new Set(sorted);
-          // return [...uniq];
-          let uniqueArr = [];
-          let unq = [];
-          sorted.forEach((element) => {
-            if (!uniqueArr.includes(element.id)) {
-              uniqueArr.push(element.id);
-              unq.push(element);
-            }
-          });
-
-          return unq;
-        });
-      });
+      .onSnapshot((snapshot) => NweetsHook(snapshot));
   }, []);
 
   return (
