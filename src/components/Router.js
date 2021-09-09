@@ -10,7 +10,9 @@ import Auth from "../routes/Auth";
 import SearchUser from "../routes/Search";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
+import Comment from "../routes/Comment";
 import Navigation from "./Navigation";
+
 const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
   return (
     <Router>
@@ -34,6 +36,9 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
             </Route>
             <Route exact path='/search'>
               <SearchUser userObj={userObj} />
+            </Route>
+            <Route exact path='/comment/:id/'>
+              <Comment userObj={userObj} />
             </Route>
           </div>
         ) : (

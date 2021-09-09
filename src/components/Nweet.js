@@ -2,31 +2,18 @@ import React, { useState, useEffect } from "react";
 import { dbService, realtimeDatabase, storageService } from "../fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router";
 
-const Nweet = ({ nweetObj, isOwner }) => {
+const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(nweetObj.text);
-
-  // useEffect(() => {
-  //   let svg = createAvatar(style, {
-  //     seed: "yoonhero",
-  //     // ... and other options
-  //   });
-  //   setAvatar(svg)
-  // }, []);
-
+  const [reply, setReply] = useState();
+  const [newReply, setNewReply] = useState("");
   const [avatar, setAvatar] = useState("");
+  const history = useHistory();
 
-  useEffect(() => {
-    // dbService.collection("profile").onSnapshot((snapshot) => {
-    //   snapshot.docs.map((doc) => {
-    //     if (doc.data().id == nweetObj.creatorId) {
-    //       setAvatar(doc.data().attachmentUrl);
-    //       return;
-    //     }
-    //   });
-    // });
-    realtimeDatabase
+  useEffect(async () => {
+    await realtimeDatabase
       .ref(`users/${nweetObj.creatorId}`)
       .once("value", (snapshot) => {
         snapshot.forEach(function (childSnapshot) {
@@ -38,15 +25,41 @@ const Nweet = ({ nweetObj, isOwner }) => {
           }
         });
       });
+    await realtimeDatabase.ref(`reply/${nweetObj.id}`).on("value", (snap) => {
+      let allReply = [];
+      snap.forEach((value) => {
+        allReply = [...allReply, value.val()];
+      });
+      setReply(allReply);
+    });
   }, []);
+
+  const onNewReplyChange = (event) => {
+    setNewReply(event.target.value);
+  };
+
+  const onReplySubmit = async (event) => {
+    event.preventDefault();
+    let newReplyObject = {
+      id: reply.length,
+      createdAt: Date.now(),
+      reply: newReply,
+      username: userObj.displayName,
+      creatorId: userObj.uid,
+    };
+    await realtimeDatabase
+      .ref(`reply/${nweetObj.id}`)
+      .update([...reply, newReplyObject]);
+  };
 
   const onDeleteClick = async () => {
     const ok = window.confirm("Are you sure you want to delete this nweet?");
     if (ok) {
-      await dbService.doc(`nweets/${nweetObj.id}`).delete();
+      await dbService.doc(`${userObj.uid}/${nweetObj.id}`).delete();
       if (nweetObj.attachmentUrl !== "") {
         await storageService.refFromURL(nweetObj.attachmentUrl).delete();
       }
+      await realtimeDatabase.ref(`reply/${nweetObj.id}`).remove();
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
@@ -63,6 +76,8 @@ const Nweet = ({ nweetObj, isOwner }) => {
     } = event;
     setNewNweet(value);
   };
+
+  const seeMoreComments = () => history.push(`/comment/${nweetObj.id}`);
 
   return (
     <div className='nweet'>
@@ -110,6 +125,25 @@ const Nweet = ({ nweetObj, isOwner }) => {
               </span>
             </div>
           )}
+          <form onSubmit={onReplySubmit}>
+            <input type='text' value={newReply} onChange={onNewReplyChange} />
+          </form>
+          {reply &&
+            reply.map((comment, index) => {
+              if (index >= 3) {
+                return;
+              }
+              return (
+                <>
+                  <div key={comment.id}>
+                    <p>{comment.username}</p>
+                    <p>{comment.reply}</p>
+                  </div>
+                  <hr />
+                </>
+              );
+            })}
+          <button onClick={() => seeMoreComments()}>more comments...</button>
           <hr />
         </>
       )}

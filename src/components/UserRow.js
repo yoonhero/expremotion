@@ -2,16 +2,6 @@ import React from "react";
 import { realtimeDatabase } from "../fbase";
 
 const UserRow = ({ uid, avatar, username, userObj }) => {
-  const followButton = async () => {
-    // await realtimeDatabase
-    //   .ref(`users/${userUid}/follow`)
-    //   .once("value", (snapshot) => {
-    //     follow = snapshot.val();
-    //   });
-    // if (follow.includes(userUid)) {
-    //   return <button>unfollow</button>;
-    return <button>follow</button>;
-  };
   const follow = async () => {
     let alreadyFollow = [];
     await realtimeDatabase
