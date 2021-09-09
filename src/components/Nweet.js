@@ -109,6 +109,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
               </span>
             </div>
           )}
+          <hr />
         </>
       )}
     </div>

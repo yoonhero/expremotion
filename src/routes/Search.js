@@ -36,9 +36,10 @@ const SearchUser = ({ userObj }) => {
 
   const UsersRow = () => {
     if (users) {
+      // console.log(userObj);
       let searchResult = JSON.parse(users);
       return searchResult.map((user) => {
-        return <UserRow {...user} />;
+        return <UserRow {...user} userObj={userObj} />;
       });
     }
   };
