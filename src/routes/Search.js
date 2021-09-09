@@ -10,31 +10,23 @@ const SearchUser = ({ userObj }) => {
     if (keyword === undefined || keyword === null) {
       return;
     }
-    await realtimeDatabase.ref("users").once("value", function (snapshot) {
-      let searchResult = [];
-      snapshot.forEach(function (childSnapshot) {
-        var childData = childSnapshot.val();
-        var childKey = childSnapshot.key;
-
-        if (childData.username.toLowerCase().includes(keyword.toLowerCase())) {
-          // recognize is duplicate or not
-          // const isDup = searchResult.some(function (x) {
-          //   return searchResult.indexOf(x) !== searchResult.indexOf(childData);
-          // });
-
-          const isDup = false;
-
+    await realtimeDatabase
+      .ref("users")
+      .orderByChild("username")
+      .equalTo(keyword)
+      .on("value", function (snapshot) {
+        let searchResult = [];
+        snapshot.forEach(function (childSnapshot) {
+          var childData = childSnapshot.val();
+          var childKey = childSnapshot.key;
           childData.uid = childKey;
-          if (!isDup) {
+          if (searchResult.length < 10) {
             searchResult.push(childData);
           }
-        } else {
-          return;
-        }
+        });
+        const jsonedResult = JSON.stringify(searchResult);
+        setUsers(jsonedResult);
       });
-      const jsonedResult = JSON.stringify(searchResult);
-      setUsers(jsonedResult);
-    });
   };
 
   useEffect(async () => {

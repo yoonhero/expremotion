@@ -41,7 +41,7 @@ const Home = ({ userObj }) => {
     let follows = [];
     await realtimeDatabase
       .ref(`users/${userObj.uid}/follow`)
-      .once("value", function (snapshot) {
+      .on("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
           follows.push(childSnapshot.val());
         });
