@@ -16,10 +16,6 @@ const Home = ({ userObj }) => {
         }));
         setNweets(nweetArray);
       });
-
-    realtimeDatabase
-      .ref("users/" + userObj.uid)
-      .update({ username: userObj.displayName });
   }, []);
   return (
     <div className='container'>

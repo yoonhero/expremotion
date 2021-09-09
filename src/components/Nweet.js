@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { dbService, storageService } from "../fbase";
+import { dbService, realtimeDatabase, storageService } from "../fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,14 +18,26 @@ const Nweet = ({ nweetObj, isOwner }) => {
   const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
-    dbService.collection("profile").onSnapshot((snapshot) => {
-      snapshot.docs.map((doc) => {
-        if (doc.data().id == nweetObj.creatorId) {
-          setAvatar(doc.data().attachmentUrl);
-          return;
-        }
+    // dbService.collection("profile").onSnapshot((snapshot) => {
+    //   snapshot.docs.map((doc) => {
+    //     if (doc.data().id == nweetObj.creatorId) {
+    //       setAvatar(doc.data().attachmentUrl);
+    //       return;
+    //     }
+    //   });
+    // });
+    realtimeDatabase
+      .ref(`users/${nweetObj.creatorId}`)
+      .once("value", (snapshot) => {
+        snapshot.forEach(function (childSnapshot) {
+          var childKey = childSnapshot.key;
+          var childData = childSnapshot.val();
+          if (childKey === "avatar") {
+            setAvatar(childData);
+            return;
+          }
+        });
       });
-    });
   }, []);
 
   const onDeleteClick = async () => {

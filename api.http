@@ -1,0 +1,11 @@
+###
+
+POST https://solvit-justice-hatespeech.herokuapp.com/api/answer
+
+
+{
+	user: "어코딩투코딩 동아리에게 서보모터 좀 주세요",
+	list: [
+		true, true, true, true, true, true, true, true, true, true
+	]
+}
