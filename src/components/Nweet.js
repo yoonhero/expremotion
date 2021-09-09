@@ -95,6 +95,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
                 : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
             }
           />
+          <h2>{nweetObj.username}</h2>
           <h4>{nweetObj.text}</h4>
           {nweetObj.attachmentUrl && (
             <img width={200} src={nweetObj.attachmentUrl} />
