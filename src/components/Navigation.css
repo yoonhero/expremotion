@@ -1,0 +1,23 @@
+.bottom-nav {
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  width: 100vw;
+  border: 1px solid var(--main-border);
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-items {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav-items li {
+  margin: 10px;
+  color: var(--main-black);
+  padding: 5px;
+}

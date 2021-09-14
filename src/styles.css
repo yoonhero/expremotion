@@ -9,6 +9,7 @@
   --main-blue: #3d5a80;
   --main-text-color: #e0fbfc;
   --main-red: #ee6c4d;
+  --main-border: rgb(239, 239, 239);
 }
 
 input {
