@@ -1,6 +1,14 @@
-@import "https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Oswald:wght@400;500&display=swap");
+
 * {
   box-sizing: border-box;
+}
+
+:root {
+  --main-black: #293241;
+  --main-blue: #3d5a80;
+  --main-text-color: #e0fbfc;
+  --main-red: #ee6c4d;
 }
 
 input {
@@ -10,17 +18,17 @@ input {
 }
 
 body {
-  background-color: black;
+  /* background-color: black; */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
-  color: white;
+  /* color: white; */
 }
-
+/* 
 button {
   background-color: white;
   color: black;
-}
+} */
 
 a {
   text-decoration: none;
@@ -31,6 +39,21 @@ form {
   width: 100%;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 
 .nweet-input::placeholder {
   color: white;
   opacity: 0.9;
@@ -69,7 +92,6 @@ form {
   background-color: tomato;
 }
 
-/* Profile Page */
 
 .profileForm {
   border-bottom: 1px solid rgba(255, 255, 255, 0.9);
@@ -83,7 +105,6 @@ form {
   margin-top: 50px;
 }
 
-/* Nwitter Factory */
 
 .factoryForm {
   display: flex;
@@ -158,8 +179,6 @@ form {
   font-size: 12px;
 }
 
-/* Nweet */
-
 .nweetEdit .formBtn {
   cursor: pointer;
   margin-top: 15px;
@@ -207,8 +226,6 @@ form {
   margin-right: 10px;
 }
 
-/* Auth */
-
 .authContainer {
   display: flex;
   flex-direction: column;
@@ -235,8 +252,6 @@ form {
   background: white;
   cursor: pointer;
 }
-
-/* AuthForm */
 
 .authInput {
   max-width: 320px;
@@ -272,4 +287,4 @@ form {
   display: block;
   font-size: 12px;
   text-decoration: underline;
-}
+} */

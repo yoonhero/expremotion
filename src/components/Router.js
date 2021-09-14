@@ -19,12 +19,10 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
       {isLoggedIn && <Navigation userObj={userObj} />}
       <Switch>
         {isLoggedIn ? (
-          <div
+          <main
             style={{
-              maxWidth: 890,
               width: "100%",
               margin: "0 auto",
-              marginTop: 80,
               display: "flex",
               justifyContent: "center",
             }}>
@@ -40,13 +38,20 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
             <Route exact path='/comment/:id/'>
               <Comment userObj={userObj} />
             </Route>
-          </div>
+          </main>
         ) : (
-          <>
+          <main
+            style={{
+              width: "100%",
+              height: "100vh",
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "center",
+            }}>
             <Route exact path='/'>
               <Auth />
             </Route>
-          </>
+          </main>
         )}
       </Switch>
     </Router>

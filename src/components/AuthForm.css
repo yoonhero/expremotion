@@ -1,0 +1,38 @@
+.authInput {
+  max-width: 320px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: black;
+  font-family: "Nanum Gothic", sans-serif;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.authSubmit {
+  text-align: center;
+  background: #293241;
+  padding: 15px;
+  color: white;
+  margin-top: 10;
+  cursor: pointer;
+}
+
+.authError {
+  color: var(--main-red);
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.authSwitch {
+  color: #293241;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  display: block;
+  font-size: 15px;
+  text-decoration: underline;
+}

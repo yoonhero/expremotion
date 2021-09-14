@@ -7,6 +7,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { authService, firebaseInstance } from "../fbase";
 import AuthForm from "../components/AuthForm";
+import "./Auth.css";
+
 const Auth = () => {
   const onSocialClick = async (event) => {
     const {
@@ -22,21 +24,17 @@ const Auth = () => {
   };
 
   return (
-    <div className='authContainer'>
-      <FontAwesomeIcon
-        icon={faTwitter}
-        color={"#04AAFF"}
-        size='3x'
-        style={{ marginBottom: 30 }}
-      />
+    <div className='authContainer column'>
+      {/* <img src='./happy.png' /> */}
+      <h1 class='authTitle'>Expremotion</h1>
       <AuthForm />
       <div>
         <div className='authBtns'>
           <button onClick={onSocialClick} name='google' className='authBtn'>
-            Continue with Google <FontAwesomeIcon icon={faGoogle} />
+            <FontAwesomeIcon icon={faGoogle} />
           </button>
           <button onClick={onSocialClick} name='github' className='authBtn'>
-            Continue with Github <FontAwesomeIcon icon={faGithub} />
+            <FontAwesomeIcon icon={faGithub} />
           </button>
         </div>
       </div>

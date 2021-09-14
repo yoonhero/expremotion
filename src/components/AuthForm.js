@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { authService, firebaseInstance } from "../fbase";
+import "./AuthForm.css";
 
 const inputStyles = {};
 const AuthForm = () => {
@@ -33,10 +34,15 @@ const AuthForm = () => {
       setError(error.message);
     }
   };
-  const toggleAccount = () => setNewAccount((prev) => !prev);
+  const toggleAccount = () => {
+    setNewAccount((prev) => !prev);
+    setEmail("");
+    setPassword("");
+    setError("");
+  };
   return (
     <>
-      <form onSubmit={onSubmit} className='container'>
+      <form onSubmit={onSubmit} className='container column'>
         <input
           name='email'
           type='email'
@@ -63,7 +69,7 @@ const AuthForm = () => {
         {error && <span className='authError'>{error}</span>}
       </form>
       <span onClick={toggleAccount} className='authSwitch'>
-        {newAccount ? "Sign In" : "Create Account"}
+        Or {newAccount ? "Sign In" : "Create Account"}
       </span>
     </>
   );

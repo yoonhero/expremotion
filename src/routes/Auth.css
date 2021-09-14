@@ -1,0 +1,40 @@
+.authContainer {
+  width: 100%;
+  max-width: 860px;
+}
+
+.authContainer img {
+  max-width: 300px;
+  height: auto;
+}
+
+.authBtns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+}
+
+.authBtn {
+  cursor: pointer;
+  border-radius: 50%;
+  margin: 4px;
+  border: none;
+  padding: 10px 0px;
+  font-size: 12px;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  background: #293241;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.authTitle {
+  font-size: 30px;
+  padding: 25px;
+  font-family: "Oswald", sans-serif;
+  text-decoration: none;
+  color: #293241;
+}

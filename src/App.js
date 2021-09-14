@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AppRouter from "./components/Router";
 import { authService, realtimeDatabase } from "./fbase";
 import GlobalStyles from "./reset";
+import "./styles.css";
 
 function App() {
   const [init, setInit] = useState(false);
