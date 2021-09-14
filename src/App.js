@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AppRouter from "./components/Router";
 import { authService, realtimeDatabase } from "./fbase";
+import GlobalStyles from "./reset";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -34,6 +35,7 @@ function App() {
   };
   return (
     <>
+      <GlobalStyles />
       {init ? (
         <AppRouter
           refreshUser={refreshUser}
