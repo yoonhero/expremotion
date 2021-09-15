@@ -6,6 +6,7 @@ import SearchUser from "../routes/Search";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Comment from "../routes/Comment";
+import Uploads from "../routes/Uploads";
 import { LoggedInLayout, LoggedOutLayout } from "../Layout";
 
 const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
@@ -36,6 +37,11 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
         <Route path='/comment/:id/'>
           <LoggedInLayout>
             <Comment userObj={userObj} />
+          </LoggedInLayout>
+        </Route>
+        <Route path='/uploads'>
+          <LoggedInLayout>
+            <Uploads userObj={userObj} />
           </LoggedInLayout>
         </Route>
       </Switch>
