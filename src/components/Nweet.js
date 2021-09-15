@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { dbService, realtimeDatabase, storageService } from "../fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faPencilAlt,
+  faComment,
+  faShare,
+} from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
+import "./Feed.css";
 
 const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const [editing, setEditing] = useState(false);
@@ -80,55 +86,76 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const seeMoreComments = () => history.push(`/comment/${nweetObj.id}`);
 
   return (
-    <div className='nweet'>
-      {editing ? (
-        <>
-          <form onSubmit={onSubmit} className='container nweetEdit'>
-            <input
-              type='text'
-              placeholder='Edit your nweet'
-              value={newNweet}
-              required
-              autoFocus
-              onChange={onChange}
-              className='formInput'
+    <div className='feed'>
+      <>
+        <div className='feed_header'>
+          <div className='user_info'>
+            <img
+              className='avatar'
+              src={
+                avatar != ""
+                  ? avatar
+                  : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
+              }
             />
-            <input type='submit' value='Update Nweet' className='formBtn' />
-          </form>
+            <span className='username'>{nweetObj.username}</span>
+          </div>
+          <div clsasName=' row'>
+            {isOwner && (
+              <div class='nweet__actions'>
+                <span onClick={onDeleteClick}>
+                  <FontAwesomeIcon icon={faTrash} color='#000' />
+                </span>
+                <span onClick={toggleEditing}>
+                  <FontAwesomeIcon icon={faPencilAlt} color='#000' />
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+        <section className='main_section'>
+          {editing ? (
+            <>
+              <form onSubmit={onSubmit} className='container nweetEdit'>
+                <input
+                  type='text'
+                  placeholder='Edit your nweet'
+                  value={newNweet}
+                  required
+                  autoFocus
+                  onChange={onChange}
+                  className='formInput'
+                />
+                <input type='submit' value='Update Nweet' className='formBtn' />
+              </form>
 
-          <span onClick={toggleEditing} className='formBtn cancelBtn'>
-            Cancel
-          </span>
-        </>
-      ) : (
-        <>
-          <img
-            width={30}
-            src={
-              avatar != ""
-                ? avatar
-                : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
-            }
-          />
-          <h2>{nweetObj.username}</h2>
-          <h4>{nweetObj.text}</h4>
+              <span onClick={toggleEditing} className='formBtn cancelBtn'>
+                Cancel
+              </span>
+            </>
+          ) : (
+            <span class='feed_text'>{nweetObj.text}</span>
+          )}
           {nweetObj.attachmentUrl && (
-            <img width={200} src={nweetObj.attachmentUrl} />
+            <img className='feed_img' src={nweetObj.attachmentUrl} />
           )}
-          {isOwner && (
-            <div class='nweet__actions'>
-              <span onClick={onDeleteClick}>
-                <FontAwesomeIcon icon={faTrash} color='#000' />
-              </span>
-              <span onClick={toggleEditing}>
-                <FontAwesomeIcon icon={faPencilAlt} color='#000' />
-              </span>
-            </div>
-          )}
-          <form onSubmit={onReplySubmit}>
+        </section>
+
+        <section className='feed_actions'>
+          <button onClick={() => seeMoreComments()}>
+            <FontAwesomeIcon icon={faComment} />
+            <span>{reply && reply.length}</span>
+          </button>
+          <button onClick={() => seeMoreComments()}>
+            <FontAwesomeIcon icon={faShare} />
+          </button>
+        </section>
+
+        {/* <form onSubmit={onReplySubmit}>
             <input type='text' value={newReply} onChange={onNewReplyChange} />
           </form>
-          {reply &&
+          <span>comments</span> */}
+        {/* {reply &&
             reply.map((comment, index) => {
               if (index >= 3) {
                 return;
@@ -142,11 +169,8 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
                   <hr />
                 </>
               );
-            })}
-          <button onClick={() => seeMoreComments()}>more comments...</button>
-          <hr />
-        </>
-      )}
+            })} */}
+      </>
     </div>
   );
 };

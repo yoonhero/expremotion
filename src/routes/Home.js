@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { dbService, firebaseInstance, realtimeDatabase } from "../fbase";
 import Nweet from "../components/Nweet";
-import NweetFactory from "../components/NweetFactory";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
+import Fab from "@material-ui/core/Fab";
+import Zoom from "@material-ui/core/Zoom";
+
+import "./Home.css";
 
 const Home = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
   const [follows, setFollows] = useState([]);
+  const history = useHistory();
 
   const NweetsHook = (snapshot) => {
     const nweetArray = snapshot.docs.map((doc) => ({
@@ -71,9 +76,13 @@ const Home = ({ userObj }) => {
       .onSnapshot((snapshot) => NweetsHook(snapshot));
   }, []);
 
+  const goToUploads = () => {
+    history.push("/uploads");
+  };
+
   return (
-    <div className='container'>
-      <div style={{ marginTop: 30 }}>
+    <div className='container column'>
+      <div className='feeds column'>
         {nweets.map((nweet) => (
           <Nweet
             key={nweet.id}
@@ -82,6 +91,16 @@ const Home = ({ userObj }) => {
             userObj={userObj}
           />
         ))}
+      </div>
+      <div className='floatingBtn'>
+        <Zoom in={true} timeout={200}>
+          <Fab
+            color='primary'
+            aria-label='Upload'
+            onClick={() => goToUploads()}>
+            <FontAwesomeIcon icon={faPlus} />
+          </Fab>
+        </Zoom>
       </div>
     </div>
   );
