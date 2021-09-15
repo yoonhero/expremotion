@@ -1,58 +1,43 @@
 import React from "react";
-import {
-  HashRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import Auth from "../routes/Auth";
 import SearchUser from "../routes/Search";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Comment from "../routes/Comment";
-import Navigation from "./Navigation";
+import { LoggedInLayout, LoggedOutLayout } from "../Layout";
 
 const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
   return (
     <Router>
-      {isLoggedIn && <Navigation userObj={userObj} />}
       <Switch>
-        {isLoggedIn ? (
-          <main
-            style={{
-              width: "100%",
-              margin: "0 auto",
-              display: "flex",
-              justifyContent: "center",
-            }}>
-            <Route exact path='/'>
-              <Home userObj={userObj} />
-            </Route>
-            <Route exact path='/profile'>
-              <Profile userObj={userObj} refreshUser={refreshUser} />
-            </Route>
-            <Route exact path='/search'>
-              <SearchUser userObj={userObj} />
-            </Route>
-            <Route exact path='/comment/:id/'>
-              <Comment userObj={userObj} />
-            </Route>
-          </main>
-        ) : (
-          <main
-            style={{
-              width: "100%",
-              height: "100vh",
-              margin: "0 auto",
-              display: "flex",
-              justifyContent: "center",
-            }}>
-            <Route exact path='/'>
+        {!isLoggedIn && (
+          <Route exact path='/'>
+            <LoggedOutLayout>
               <Auth />
-            </Route>
-          </main>
+            </LoggedOutLayout>
+          </Route>
         )}
+        <Route exact path='/'>
+          <LoggedInLayout></LoggedInLayout>
+          <Home userObj={userObj} />
+        </Route>
+        <Route path='/profile'>
+          <LoggedInLayout>
+            <Profile userObj={userObj} refreshUser={refreshUser} />
+          </LoggedInLayout>
+        </Route>
+        <Route path='/search'>
+          <LoggedInLayout>
+            <SearchUser userObj={userObj} />
+          </LoggedInLayout>
+        </Route>
+        <Route path='/comment/:id/'>
+          <LoggedInLayout>
+            <Comment userObj={userObj} />
+          </LoggedInLayout>
+        </Route>
       </Switch>
     </Router>
   );

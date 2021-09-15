@@ -5,7 +5,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faHome, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./Navigation.css";
 
-const Navigation = ({ userObj }) => (
+const Navigation = () => (
   <nav class='bottom-nav'>
     <ul class='nav-items'>
       <li>

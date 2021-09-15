@@ -10,6 +10,11 @@
   --main-text-color: #e0fbfc;
   --main-red: #ee6c4d;
   --main-border: rgb(239, 239, 239);
+  --main-grey: #8d99ae;
+  --main-yellow: #ffc24b;
+  --main-green: #3c6e71;
+  --white: #ffffff;
+  --pink: #ff5d8f;
 }
 
 input {

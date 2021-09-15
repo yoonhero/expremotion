@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { dbService, firebaseInstance, realtimeDatabase } from "../fbase";
 import Nweet from "../components/Nweet";
 import NweetFactory from "../components/NweetFactory";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Home = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
+  const [follows, setFollows] = useState([]);
 
   const NweetsHook = (snapshot) => {
     const nweetArray = snapshot.docs.map((doc) => ({
@@ -35,18 +38,6 @@ const Home = ({ userObj }) => {
   };
 
   useEffect(async () => {
-    setNweets([]);
-
-    // find user's follower
-    let follows = [];
-    await realtimeDatabase
-      .ref(`users/${userObj.uid}/follow`)
-      .on("value", function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-          follows.push(childSnapshot.val());
-        });
-      });
-
     // other people feeds
     follows.map(async (follow) => {
       if (follow === userObj.uid) {
@@ -58,6 +49,19 @@ const Home = ({ userObj }) => {
         .limit(10)
         .onSnapshot((snapshot) => NweetsHook(snapshot));
     });
+  }, [follows]);
+
+  useEffect(async () => {
+    // find user's follower
+    let new_follows = [];
+    await realtimeDatabase
+      .ref(`users/${userObj.uid}/follow`)
+      .on("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          new_follows.push(childSnapshot.val());
+        });
+        setFollows(new_follows);
+      });
 
     // my feeds
     await dbService

@@ -98,7 +98,7 @@ export default ({ refreshUser, userObj }) => {
           <div className='img-thumbnail img-circle'>
             <div>
               {attachment ? (
-                <img className='profileImg' src={attachment} />
+                <img width={200} className='profileImg' src={attachment} />
               ) : (
                 <img
                   className='profileImg'
