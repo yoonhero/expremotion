@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AppRouter from "./components/Router";
 import { authService, realtimeDatabase } from "./fbase";
+import Loading from "./routes/Loading";
 import GlobalStyles from "./reset";
 import "./styles.css";
 
@@ -37,14 +38,14 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      {init ? (
+      {!init ? (
         <AppRouter
           refreshUser={refreshUser}
           isLoggedIn={Boolean(userObj)}
           userObj={userObj}
         />
       ) : (
-        "Initializing ..."
+        <Loading />
       )}
     </>
   );
