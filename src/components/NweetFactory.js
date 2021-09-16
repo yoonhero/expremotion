@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { storageService, dbService } from "../fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faImage,
+  faPlus,
+  faTimes,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+import "./Upload.css";
 
 const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
@@ -60,9 +67,15 @@ const NweetFactory = ({ userObj }) => {
   };
   const onClearAttachment = () => setAttachment(null);
   return (
-    <form onSubmit={onSubmit} className='factoryForm'>
+    <form onSubmit={onSubmit} className='column factoryForm'>
+      <select value={emotion} onChange={onChangeEmotion}>
+        <option value='happy'>happy</option>
+        <option value='sad'>sad</option>
+        <option value='soso'>soso</option>
+        <option value='angry'>angry</option>
+      </select>
       <div className='factoryInput__container'>
-        <input
+        <textarea
           className='factoryInput__input'
           value={nweet}
           onChange={onChange}
@@ -70,28 +83,17 @@ const NweetFactory = ({ userObj }) => {
           placeholder="What's on your mind?"
           maxLength={120}
         />
-        <input type='submit' value='&rarr;' className='factoryInput__arrow' />
       </div>
-      <label for='attach-file' className='factoryInput__label'>
-        <span>Add photos</span>
-        <FontAwesomeIcon icon={faPlus} />
-      </label>
       <input
         id='attach-file'
         type='file'
         accept='image/*'
         onChange={onFileChange}
         style={{
-          opacity: 0,
+          display: "none",
         }}
       />
-      <select value={emotion} onChange={onChangeEmotion}>
-        <option value='happy'>happy</option>
-        <option value='sad'>sad</option>
-        <option value='soso'>soso</option>
-        <option value='angry'>angry</option>
-      </select>
-      {attachment && (
+      {attachment ? (
         <div className='factoryForm__attachment'>
           <img
             src={attachment}
@@ -100,11 +102,18 @@ const NweetFactory = ({ userObj }) => {
             }}
           />
           <div className='factoryForm__clear' onClick={onClearAttachment}>
-            <span>Remove</span>
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon icon={faTrash} />
           </div>
         </div>
+      ) : (
+        <label for='attach-file' className='factoryInput__label'>
+          <FontAwesomeIcon icon={faImage} />
+        </label>
       )}
+
+      <button type='submit' className='factoryInput__arrow'>
+        <FontAwesomeIcon icon={faCheck} />
+      </button>
     </form>
   );
 };

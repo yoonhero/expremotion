@@ -15,17 +15,17 @@ const Navigation = () => (
         </Link>
       </li>
       <li>
+        <Link to='/search' class=''>
+          <FontAwesomeIcon icon={faSearch} size='lg' />
+          {/* <span>Search</span> */}
+        </Link>
+      </li>
+      <li>
         <Link to='/profile' class=''>
           <FontAwesomeIcon icon={faUser} size='lg' />
           {/* <span>
             {userObj.displayName ? `${userObj.displayName}` : "Profile"}
           </span> */}
-        </Link>
-      </li>
-      <li>
-        <Link to='/search' class=''>
-          <FontAwesomeIcon icon={faSearch} size='lg' />
-          {/* <span>Search</span> */}
         </Link>
       </li>
     </ul>

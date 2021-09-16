@@ -3,9 +3,9 @@ import NweetFactory from "../components/NweetFactory";
 
 const Uploads = ({ userObj }) => {
   return (
-    <div>
+    <>
       <NweetFactory userObj={userObj} />
-    </div>
+    </>
   );
 };
 
