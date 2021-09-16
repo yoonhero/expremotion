@@ -1,0 +1,123 @@
+.main {
+  width: 100%;
+}
+
+@keyframes border-canceled {
+  from {
+    border-radius: 30px;
+    max-width: 400px;
+  }
+  to {
+    border-radius: 20px;
+    max-width: 180px;
+  }
+}
+
+.comment_input {
+  position: fixed;
+  top: 20px;
+  z-index: 10;
+  width: 100%;
+  max-width: 180px;
+  padding: 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  background-color: var(--white);
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: black;
+  font-family: "Nanum Gothic", sans-serif;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  animation-name: border-canceled;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes border-focus {
+  from {
+    border-radius: 20px;
+  }
+  to {
+    border-radius: 30px;
+    max-width: 400px;
+  }
+}
+
+.comment_input:focus {
+  animation-name: border-focus;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.comments_container {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  padding-top: 100px;
+  margin-bottom: 150px;
+}
+
+.comment {
+  width: 100%;
+  margin: 10px 0;
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  /* flex-direction: row-reverse; */
+  /* flex-direction: ${(props) => (props.outGoing ? "row-reverse" : "row")}; */
+  align-items: flex-start;
+  position: relative;
+}
+
+.username {
+  font-size: 18px;
+  color: var(--main-black);
+  font-weight: 500;
+  padding: 5px;
+}
+
+.message {
+  display: flex;
+  border-radius: 10px 15px;
+  max-width: 90%;
+  min-width: 16%;
+  background: var(--white);
+  border: 1px solid var(--main-border);
+  padding: 15px 20px;
+  overflow: hidden;
+  font-size: 16px;
+  margin: 0px 10px;
+}
+
+/* 
+const MessageContiainer = styled.div`
+margin: 10px;
+  padding: 0px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: ${(props) => (props.outGoing ? "row-reverse" : "row")};
+  align-items: flex-end;
+  position: relative;
+  
+  @media only screen and (max-width: 400px){
+    padding: 0px;
+  }
+`;
+
+const Message = styled.div`
+  display: flex;
+  border-radius: 10px 15px;
+max-width: 90%;
+min-width: 16%;
+  color: ${(props) =>
+    props.outGoing ? "white" : "#52616b"};;
+  background-color: ${(props) =>
+    props.outGoing ? "#3fc380" : "#c9d6df"};
+  padding: 15px 20px;
+  overflow: hidden;
+  font-size: 16px;
+  margin: 0px 10px;
+` */
