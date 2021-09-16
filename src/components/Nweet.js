@@ -6,6 +6,8 @@ import {
   faPencilAlt,
   faComment,
   faShare,
+  faCheck,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import "./Feed.css";
@@ -68,14 +70,17 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
       await realtimeDatabase.ref(`reply/${nweetObj.id}`).remove();
     }
   };
+
   const toggleEditing = () => setEditing((prev) => !prev);
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.doc(`nweets/${nweetObj.id}`).update({
+    await dbService.doc(`${userObj.uid}/${nweetObj.id}`).update({
       text: newNweet,
     });
+    nweetObj.text = newNweet;
     setEditing(false);
   };
+
   const onChange = (event) => {
     const {
       target: { value },
@@ -116,22 +121,27 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
         <section className='main_section'>
           {editing ? (
             <>
-              <form onSubmit={onSubmit} className='container nweetEdit'>
-                <input
+              <form onSubmit={onSubmit} className='column edit_feed'>
+                <textarea
                   type='text'
-                  placeholder='Edit your nweet'
+                  placeholder='Edit your Feed'
                   value={newNweet}
                   required
                   autoFocus
                   onChange={onChange}
-                  className='formInput'
+                  className='edit_input'
                 />
-                <input type='submit' value='Update Nweet' className='formBtn' />
+                <div className='row edit_feed_buttons'>
+                  <button type='submit' className='edit_feed_button'>
+                    <FontAwesomeIcon icon={faCheck} />
+                  </button>
+                  <button
+                    onClick={toggleEditing}
+                    className='cancelBtn edit_feed_button'>
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </div>
               </form>
-
-              <span onClick={toggleEditing} className='formBtn cancelBtn'>
-                Cancel
-              </span>
             </>
           ) : (
             <span class='feed_text'>{nweetObj.text}</span>

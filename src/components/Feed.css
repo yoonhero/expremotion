@@ -82,3 +82,37 @@
 .feed_actions button span {
   font-size: 14px;
 }
+
+.edit_feed {
+  padding: 0 10px;
+  padding-bottom: 10px;
+}
+
+.edit_feed_buttons {
+}
+
+.edit_feed_button {
+  border: 1px solid var(--main-border);
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  margin: 5px;
+  border: none;
+  background: var(--main-blue);
+  color: var(--main-text-color);
+}
+
+.cancelBtn {
+  background-color: var(--main-red);
+}
+
+.edit_input {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  resize: none;
+  border: 1px solid var(--main-border);
+  border-radius: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
