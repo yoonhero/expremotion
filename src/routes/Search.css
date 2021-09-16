@@ -1,0 +1,56 @@
+.search_container {
+  width: 100%;
+  max-width: 780px;
+}
+
+.users_container {
+  width: 100%;
+}
+
+.search_form {
+  padding: 20px;
+}
+
+@keyframes border-canceled {
+  from {
+    border-radius: 30px;
+    max-width: 400px;
+  }
+  to {
+    border-radius: 20px;
+    max-width: 180px;
+  }
+}
+
+.search_input {
+  width: 100%;
+  max-width: 180px;
+  padding: 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  background-color: var(--white);
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: black;
+  font-family: "Nanum Gothic", sans-serif;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  animation-name: border-canceled;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes border-focus {
+  from {
+    border-radius: 20px;
+  }
+  to {
+    border-radius: 30px;
+    max-width: 400px;
+  }
+}
+
+.search_input:focus {
+  animation-name: border-focus;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}

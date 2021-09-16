@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserRow from "../components/UserRow";
 import { realtimeDatabase } from "../fbase";
+import "./Search.css";
 
 const SearchUser = ({ userObj }) => {
   const [users, setUsers] = useState("");
@@ -72,12 +73,18 @@ const SearchUser = ({ userObj }) => {
   };
 
   return (
-    <div>
-      <h1>Search...</h1>
-      <form onSubmit={onSubmit}>
-        <input type='text' required value={keyword} onChange={onChange} />
+    <div class='search_container column'>
+      <form onSubmit={onSubmit} className='search_form column'>
+        <input
+          placeholder='Search...'
+          className='search_input'
+          type='text'
+          required
+          value={keyword}
+          onChange={onChange}
+        />
       </form>
-      {UsersRow()}
+      <div className='users_container column'>{UsersRow()}</div>
     </div>
   );
 };

@@ -38,7 +38,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      {!init ? (
+      {init ? (
         <AppRouter
           refreshUser={refreshUser}
           isLoggedIn={Boolean(userObj)}

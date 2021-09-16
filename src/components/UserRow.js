@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { realtimeDatabase } from "../fbase";
+import { useHistory } from "react-router-dom";
+import "./UserRow.css";
 
 const UserRow = ({ uid, avatar, username, userObj }) => {
   const [follows, setFollows] = useState(false);
+  const [isMe, setIsMe] = useState(false);
+  const history = useHistory();
 
   const getButton = async () => {
     await realtimeDatabase
@@ -18,7 +22,12 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
       });
   };
 
+  const goToProfile = () => {
+    history.push("/profile");
+  };
+
   useEffect(async () => {
+    setIsMe(uid == userObj.uid);
     await getButton();
   }, []);
 
@@ -53,19 +62,29 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
   };
 
   return (
-    <div key={uid}>
-      <img
-        width={100}
-        src={
-          avatar != ""
-            ? avatar
-            : `https://avatars.dicebear.com/api/croodles-neutral/:${username}.svg`
-        }
-      />
-      <div>{username}</div>
-      <button onClick={() => follow()}>
-        {follows ? "UnFollow" : "Follow"}
-      </button>
+    <div className='user_row' key={uid}>
+      <div className='row'>
+        <img
+          className='avatar'
+          src={
+            avatar != ""
+              ? avatar
+              : `https://avatars.dicebear.com/api/croodles-neutral/:${username}.svg`
+          }
+        />
+        <div className='username'>{username}</div>
+      </div>
+      {!isMe ? (
+        <button
+          className={`follow_button ${follows ? "follow" : "unfollow"}`}
+          onClick={() => follow()}>
+          {follows ? "UnFollow" : "Follow"}
+        </button>
+      ) : (
+        <button className='follow_button profile' onClick={() => goToProfile()}>
+          Profile
+        </button>
+      )}
     </div>
   );
 };

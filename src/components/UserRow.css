@@ -1,0 +1,47 @@
+.user_row {
+  margin: 5px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--main-border);
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-position: cover;
+  border: 1px solid var(--main-border);
+}
+
+.username {
+  font-size: 20px;
+  color: var(--main-black);
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.follow_button {
+  padding: 12px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--main-border);
+}
+
+.unfollow {
+  background-color: var(--main-blue);
+  color: var(--white);
+}
+
+.follow {
+  color: var(--main-blue);
+  background: var(--white);
+}
+
+.profile {
+  color: var(--white);
+  background: var(--main-green);
+}
