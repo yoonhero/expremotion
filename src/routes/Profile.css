@@ -1,0 +1,72 @@
+.profileContainer {
+  width: 100%;
+}
+
+.profileForm {
+  width: 100%;
+  padding: 10px;
+}
+
+.profileImg_container {
+  padding: 10px;
+  width: 100%;
+  margin: 20px;
+}
+
+.profileImg {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-position: cover;
+  border: 1px solid var(--main-border);
+  margin: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.username_container {
+  width: 100%;
+  margin: 20px;
+}
+
+.span_upload {
+  font-size: 14px;
+  text-decoration: underline;
+  color: var(--main-blue);
+  font-weight: 500;
+}
+
+.formInput {
+  width: 100%;
+  max-width: 180px;
+  padding: 14px;
+  border-radius: 25px;
+  font-weight: 500;
+  background-color: var(--white);
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: black;
+  font-family: "Nanum Gothic", sans-serif;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.formBtn {
+  margin: 10px 0;
+  padding: 12px 18px;
+  border: 1px solid var(--main-border);
+  border-radius: 20px;
+  background: var(--main-blue);
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.logOut {
+  background: var(--white);
+  border: 1px solid var(--main-border);
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: var(--main-red);
+  border-radius: 50%;
+  font-size: 18px;
+}

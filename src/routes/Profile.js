@@ -6,12 +6,15 @@ import {
   storageService,
 } from "../fbase";
 import { useHistory } from "react-router-dom";
+import "./Profile.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default ({ refreshUser, userObj }) => {
   const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [attachment, setAttachment] = useState("");
-  let profileImgUrl = "";
+
   useEffect(() => {
     // dbService
     //   .collection("profile")
@@ -36,6 +39,7 @@ export default ({ refreshUser, userObj }) => {
         });
       });
   }, []);
+
   const onLogOutClick = () => {
     authService.signOut();
     history.push("/");
@@ -74,6 +78,7 @@ export default ({ refreshUser, userObj }) => {
     // await dbService.collection("profile").doc(userObj.uid).set(profileArray);
     history.push("/");
   };
+
   const onFileChange = (event) => {
     const {
       target: { files },
@@ -92,11 +97,11 @@ export default ({ refreshUser, userObj }) => {
   const onClearAttachment = () => setAttachment(null);
 
   return (
-    <div className='profileContainer'>
-      <form onSubmit={onSubmit} className='profileForm'>
-        <label for='attach-file' className='PofileInput__label'>
-          <div className='img-thumbnail img-circle'>
-            <div>
+    <div className='profileContainer column'>
+      <form onSubmit={onSubmit} className='profileForm column'>
+        <div className='profileImg_container column'>
+          <label for='attach-file' className='PofileInput__label'>
+            <div className='column'>
               {attachment ? (
                 <img width={200} className='profileImg' src={attachment} />
               ) : (
@@ -105,34 +110,36 @@ export default ({ refreshUser, userObj }) => {
                   src={`https://avatars.dicebear.com/api/croodles-neutral/:${userObj.displayName}.svg`}
                 />
               )}
-
-              <span className='span_upload'>UPLOAD</span>
+              <span className='span_upload'>Change Avatar</span>
             </div>
-          </div>
-        </label>
-        <input
-          id='attach-file'
-          type='file'
-          accept='image/*'
-          onChange={onFileChange}
-          style={{
-            opacity: 0,
-          }}
-        />
+          </label>
 
-        <input
-          onChange={onChange}
-          type='text'
-          autoFocus
-          placeholder='Display name'
-          value={newDisplayName}
-          className='formInput'
-        />
-        <input type='submit' value='Update Profile' className='formBtn' />
+          <input
+            id='attach-file'
+            type='file'
+            accept='image/*'
+            onChange={onFileChange}
+            style={{
+              display: "none",
+            }}
+          />
+        </div>
+
+        <div className='column username_container'>
+          <input
+            onChange={onChange}
+            type='text'
+            autoFocus
+            placeholder='Username'
+            value={newDisplayName}
+            className='formInput'
+          />
+          <input type='submit' value='Update' className='formBtn' />
+        </div>
       </form>
 
       <button onClick={onLogOutClick} className='logOut'>
-        log out
+        <FontAwesomeIcon icon={faSignOutAlt} />
       </button>
     </div>
   );
