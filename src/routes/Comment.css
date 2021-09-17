@@ -1,7 +1,7 @@
 .main {
   width: 100%;
 }
-
+/* 
 @keyframes border-canceled {
   from {
     border-radius: 30px;
@@ -11,16 +11,16 @@
     border-radius: 20px;
     max-width: 180px;
   }
-}
+} */
 
 .comment_input {
   position: fixed;
-  top: 20px;
+  bottom: 60px;
   z-index: 10;
-  width: 100%;
-  max-width: 180px;
-  padding: 16px;
-  border-radius: 20px;
+  width: 90%;
+  max-width: 580px;
+  padding: 12px;
+  border-radius: 40px;
   font-weight: 500;
   background-color: var(--white);
   margin-bottom: 12px;
@@ -28,12 +28,12 @@
   color: black;
   font-family: "Nanum Gothic", sans-serif;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  animation-name: border-canceled;
+  /* animation-name: border-canceled;
   animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+  animation-fill-mode: forwards; */
 }
 
-@keyframes border-focus {
+/* @keyframes border-focus {
   from {
     border-radius: 20px;
   }
@@ -47,7 +47,7 @@
   animation-name: border-focus;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
-}
+} */
 
 .comments_container {
   width: 100%;
@@ -56,7 +56,6 @@
   flex-direction: column;
   align-self: center;
   justify-content: center;
-  padding-top: 100px;
   margin-bottom: 150px;
 }
 

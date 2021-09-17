@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 
 export const LoggedInLayout = ({ children }) => {
@@ -10,7 +11,8 @@ export const LoggedInLayout = ({ children }) => {
         display: "flex",
         justifyContent: "center",
       }}>
-      {<Navigation />}
+      {/* <Header /> */}
+      <Navigation />
       {children}
     </main>
   );

@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import "./Profile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import LazyImageLoading from "../components/LazyImageLoading";
 
 export default ({ refreshUser, userObj }) => {
   const history = useHistory();
@@ -103,11 +104,15 @@ export default ({ refreshUser, userObj }) => {
           <label for='attach-file' className='PofileInput__label'>
             <div className='column'>
               {attachment ? (
-                <img width={200} className='profileImg' src={attachment} />
-              ) : (
-                <img
+                <LazyImageLoading
+                  width={200}
                   className='profileImg'
-                  src={`https://avatars.dicebear.com/api/croodles-neutral/:${userObj.displayName}.svg`}
+                  image={attachment}
+                />
+              ) : (
+                <LazyImageLoading
+                  className='profileImg'
+                  image={`https://avatars.dicebear.com/api/croodles-neutral/:${userObj.displayName}.svg`}
                 />
               )}
               <span className='span_upload'>Change Avatar</span>

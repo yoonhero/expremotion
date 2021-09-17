@@ -18,6 +18,7 @@ import {
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from "body-scroll-lock";
+import LazyImageLoading from "./LazyImageLoading";
 
 const customStyles = {
   content: {
@@ -157,9 +158,9 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
         </Modal>
         <div className='feed_header'>
           <div className='user_info'>
-            <img
+            <LazyImageLoading
               className='avatar'
-              src={
+              image={
                 avatar != ""
                   ? avatar
                   : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
@@ -212,7 +213,10 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
             <span class='feed_text'>{nweetObj.text}</span>
           )}
           {nweetObj.attachmentUrl && (
-            <img className='feed_img' src={nweetObj.attachmentUrl} />
+            <LazyImageLoading
+              image={nweetObj.attachmentUrl}
+              className='feed_img'
+            />
           )}
         </section>
 
@@ -221,7 +225,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
             <FontAwesomeIcon icon={faComment} />
             <span>{reply && reply.length}</span>
           </button>
-          <button onClick={() => seeMoreComments()}>
+          <button>
             <FontAwesomeIcon icon={faShare} />
           </button>
         </section>
