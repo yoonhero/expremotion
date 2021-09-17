@@ -116,3 +116,37 @@
   border-radius: 20px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
+
+.nweet__actions {
+  padding: 0 20px;
+}
+
+.modal_contents {
+  padding: 0;
+  width: 400px;
+  min-width: 300px;
+  max-width: 680px;
+  background: transparent;
+}
+
+.modal_button {
+  border: 1px solid var(--main-border);
+  color: rgb(164 156 156);
+  background-color: var(--white);
+  width: 100%;
+  font-size: 16px;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.delete_btn {
+  color: var(--main-red);
+}
+
+.first_btn {
+  border-radius: 20px 20px 0 0;
+}
+
+.last_btn {
+  border-radius: 0 0 20px 20px;
+}

@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600;700&display=swap");
+
 .factoryForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  padding: 100px 0;
   max-width: 580px;
 }
 
@@ -34,12 +37,12 @@
 .factoryInput__arrow {
   background-color: var(--main-blue);
   border: none;
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   text-align: center;
   border-radius: 50%;
   color: white;
-  margin: 10px 0;
+  margin-top: 40px;
   font-size: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -82,4 +85,34 @@
 .factoryForm__clear span {
   margin-right: 10px;
   font-size: 12px;
+}
+
+select {
+  padding: 10px 5px;
+  border: 1px solid var(--main-border);
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Prompt", sans-serif;
+  text-align: center;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.yourFeeling {
+  padding: 20px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 400;
+  gap: 10px;
+  font-family: "Dancing Script", cursive;
+}
+
+.gif_player {
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 480px;
+  min-height: 150px;
 }
