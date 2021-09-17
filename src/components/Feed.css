@@ -138,6 +138,10 @@
   padding: 15px;
   font-weight: 600;
 }
+/* 
+.modal_button:hover {
+  background: var(--pink);
+} */
 
 .delete_btn {
   color: var(--main-red);

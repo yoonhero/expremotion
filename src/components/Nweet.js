@@ -13,6 +13,11 @@ import {
 import { useHistory } from "react-router";
 import "./Feed.css";
 import Modal from "react-modal";
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from "body-scroll-lock";
 
 const customStyles = {
   content: {
@@ -61,6 +66,13 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
     });
   }, []);
 
+  useEffect(async () => {
+    if (modal) {
+      return disableBodyScroll(document.getElementById("root"));
+    }
+    return enableBodyScroll(document.getElementById("root"));
+  }, [modal]);
+
   const onNewReplyChange = (event) => {
     setNewReply(event.target.value);
   };
@@ -81,7 +93,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
 
   const onDeleteClick = async () => {
     setModal(false);
-    const ok = window.confirm("Are you sure you want to delete this nweet?");
+    const ok = window.confirm("Are you sure you want to delete this feed?");
     if (ok) {
       await dbService.doc(`${userObj.uid}/${nweetObj.id}`).delete();
       if (nweetObj.attachmentUrl !== "") {
