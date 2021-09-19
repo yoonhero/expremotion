@@ -33,10 +33,10 @@ const NweetFactory = ({ userObj }) => {
   }, [chosenEmoji]);
 
   const onSubmit = async (event) => {
+    event.preventDefault();
     if (nweet === "") {
       return;
     }
-    event.preventDefault();
     let attachmentUrl = "";
     if (attachment !== "") {
       const attachmentRef = storageService
