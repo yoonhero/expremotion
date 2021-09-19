@@ -12,14 +12,15 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUserObj({
-          displayName: user.displayName,
+          displayName: user.displayName ? user.displayName : user.email,
           uid: user.uid,
           updateProfile: (args) => user.updateProfile(args),
         });
 
-        realtimeDatabase
-          .ref("users/" + user.uid)
-          .update({ username: user.displayName, email: user.email });
+        realtimeDatabase.ref("users/" + user.uid).update({
+          username: user.displayName ? user.displayName : user.email,
+          email: user.email,
+        });
       } else {
         setUserObj(null);
       }

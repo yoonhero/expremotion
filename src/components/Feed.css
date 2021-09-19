@@ -155,13 +155,13 @@
 }
 
 .modal_button {
-  border: 1px solid var(--main-border);
+  border: 0.5px solid var(--main-border);
   color: rgb(164 156 156);
   background-color: var(--white);
   width: 100%;
   font-size: 16px;
   padding: 15px;
-  font-weight: 600;
+  font-weight: 400;
 }
 /* 
 .modal_button:hover {

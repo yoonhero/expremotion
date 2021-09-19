@@ -30,9 +30,14 @@
 
 .span_upload {
   font-size: 14px;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   color: var(--main-blue);
   font-weight: 500;
+  cursor: pointer;
+}
+
+.span_upload:hover {
+  text-decoration: underline;
 }
 
 .formInput {
@@ -58,6 +63,11 @@
   color: var(--white);
   font-size: 18px;
   font-weight: 400;
+}
+
+.formBtn:hover {
+  color: var(--main-blue);
+  background: var(--white);
 }
 
 .logOut {

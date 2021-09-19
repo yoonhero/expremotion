@@ -83,14 +83,27 @@ const Home = ({ userObj }) => {
   return (
     <div className='container column'>
       <div className='feeds column'>
-        {nweets.map((nweet) => (
-          <Nweet
-            key={nweet.id}
-            nweetObj={nweet}
-            isOwner={nweet.creatorId === userObj.uid}
-            userObj={userObj}
-          />
-        ))}
+        {nweets.length !== 0 ? (
+          nweets.map((nweet) => (
+            <Nweet
+              key={nweet.id}
+              nweetObj={nweet}
+              isOwner={nweet.creatorId === userObj.uid}
+              userObj={userObj}
+            />
+          ))
+        ) : (
+          <div className='column first_introduce'>
+            <img
+              src={
+                "https://i1.wp.com/i.giphy.com/media/MgRKCBGvlpqTENUzWk/giphy.gif"
+              }
+              alt='loading...'
+            />
+
+            <span>Please Follow Other User or Express Your Emotion!</span>
+          </div>
+        )}
       </div>
       <div className='floatingBtn'>
         <Zoom in={true} timeout={200}>
