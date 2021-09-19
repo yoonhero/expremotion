@@ -1,9 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+
 .feed {
   width: 90%;
   padding: 20px;
   border: 1px solid var(--main-border);
   margin: 20px 0;
   border-radius: 10px;
+  /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+}
+
+.main_content {
+  width: 100%;
 }
 
 .feed_header {
@@ -30,23 +37,25 @@
 }
 
 .username {
+  font-family: "Nato Sans", sans-serif;
   font-size: 18px;
   color: var(--main-black);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .main_section {
   padding: 15px;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
 }
 
 .feed_text {
-  padding: 5px;
-  padding-top: 0;
+  /* padding: 5px;
+  padding-top: 0; */
   margin: 10px;
   margin-top: 0;
-  font-size: 15px;
+  font-size: 18px;
   color: var(--main-black);
   font-weight: 400;
 }
@@ -128,7 +137,8 @@
 .edit_input {
   width: 100%;
   padding: 15px;
-  font-size: 20px;
+  min-height: 100px;
+  font-size: 18px;
   resize: none;
   border: 1px solid var(--main-border);
   border-radius: 20px;

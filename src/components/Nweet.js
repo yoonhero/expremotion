@@ -185,7 +185,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
                 : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
             }
           />
-          <div>
+          <div className='main_content'>
             <div className='feed_header'>
               <div className='user_info'>
                 <span className='username'>{nweetObj.username}</span>

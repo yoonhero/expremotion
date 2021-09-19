@@ -45,8 +45,16 @@
   margin: 10px;
 }
 
-@media screen and (max-width: 780px) {
+@media only screen and (max-width: 780px) {
   .first_introduce span {
     font-size: 22px;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .floatingBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
   }
 }
