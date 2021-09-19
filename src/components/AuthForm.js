@@ -4,9 +4,9 @@ import "./AuthForm.css";
 
 const inputStyles = {};
 const AuthForm = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(localStorage.getItem("email"));
   const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(!localStorage.getItem("email"));
   const [error, setError] = useState("");
   const onChange = (event) => {
     const {
@@ -27,6 +27,7 @@ const AuthForm = () => {
           email,
           password
         );
+        localStorage.setItem("email", email);
       } else {
         data = await authService.signInWithEmailAndPassword(email, password);
       }

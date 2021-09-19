@@ -19,6 +19,16 @@ import {
   clearAllBodyScrollLocks,
 } from "body-scroll-lock";
 import LazyImageLoading from "./LazyImageLoading";
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  RedditShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from "react-share";
 
 const customStyles = {
   content: {
@@ -43,6 +53,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const history = useHistory();
   const [modal, setModal] = useState(false);
   const [createdAt, setCreatedAt] = useState("");
+  // const [like, setLike] = useState(0)
 
   const toggleAction = () => setModal((modal) => !modal);
 
@@ -129,6 +140,12 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
 
   const seeMoreComments = () => history.push(`/comment/${nweetObj.id}`);
 
+  // const onLikebuttonClick = async() => {
+  //   await realtimeDatabase
+  //     .ref(`like/${nweetObj.id}`)
+  //     .update([...reply, newReplyObject]);
+  // }
+
   return (
     <div className='feed'>
       <>
@@ -159,81 +176,89 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
             </button>
           </div>
         </Modal>
-        <div className='feed_header'>
-          <div className='user_info'>
-            <LazyImageLoading
-              className='avatar'
-              image={
-                avatar != ""
-                  ? avatar
-                  : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
-              }
-            />
-            <span className='username'>{nweetObj.username}</span>
-            <span className=''>·</span>
-            <h4 className='date'>{createdAt}</h4>
-          </div>
-          <div clsasName=' row'>
-            {isOwner && (
-              <div class='nweet__actions'>
-                <span onClick={toggleAction}>
-                  <FontAwesomeIcon icon={faEllipsisH} />
-                </span>
-                {/* <span onClick={onDeleteClick}>
+        <div className='main_feed'>
+          <LazyImageLoading
+            className='avatar'
+            image={
+              avatar != ""
+                ? avatar
+                : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
+            }
+          />
+          <div>
+            <div className='feed_header'>
+              <div className='user_info'>
+                <span className='username'>{nweetObj.username}</span>
+                <span className=''>·</span>
+                <h4 className='date'>{createdAt}</h4>
+              </div>
+              <div clsasName=' row'>
+                {isOwner && (
+                  <div class='nweet__actions'>
+                    <span onClick={toggleAction}>
+                      <FontAwesomeIcon icon={faEllipsisH} />
+                    </span>
+                    {/* <span onClick={onDeleteClick}>
                   <FontAwesomeIcon icon={faTrash} color='#000' />
                 </span>
                 <span onClick={toggleEditing}>
                   <FontAwesomeIcon icon={faPencilAlt} color='#000' />
                 </span> */}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+            <section className='main_section'>
+              {editing ? (
+                <>
+                  <form onSubmit={onSubmit} className='column edit_feed'>
+                    <textarea
+                      type='text'
+                      placeholder='Edit your Feed'
+                      value={newNweet}
+                      required
+                      autoFocus
+                      onChange={onChange}
+                      className='edit_input'
+                    />
+                    <div className='row edit_feed_buttons'>
+                      <button type='submit' className='edit_feed_button'>
+                        <FontAwesomeIcon icon={faCheck} />
+                      </button>
+                      <button
+                        onClick={toggleEditing}
+                        className='cancelBtn edit_feed_button'>
+                        <FontAwesomeIcon icon={faTimes} />
+                      </button>
+                    </div>
+                  </form>
+                </>
+              ) : (
+                <span class='feed_text'>{nweetObj.text}</span>
+              )}
+              {nweetObj.attachmentUrl && (
+                <LazyImageLoading
+                  image={nweetObj.attachmentUrl}
+                  className='feed_img'
+                />
+              )}
+            </section>
+
+            <section className='feed_actions'>
+              <button onClick={() => seeMoreComments()}>
+                <FontAwesomeIcon icon={faComment} />
+                <span>{reply && reply.length}</span>
+              </button>
+              <button>
+                <FontAwesomeIcon icon={faShare} />
+              </button>
+              {/* <FacebookShareButton url={window.location}>hi</FacebookShareButton>
+          <LineShareButton url={window.location}>line</LineShareButton>
+
+          <TwitterShareButton></TwitterShareButton> */}
+            </section>
           </div>
         </div>
-        <section className='main_section'>
-          {editing ? (
-            <>
-              <form onSubmit={onSubmit} className='column edit_feed'>
-                <textarea
-                  type='text'
-                  placeholder='Edit your Feed'
-                  value={newNweet}
-                  required
-                  autoFocus
-                  onChange={onChange}
-                  className='edit_input'
-                />
-                <div className='row edit_feed_buttons'>
-                  <button type='submit' className='edit_feed_button'>
-                    <FontAwesomeIcon icon={faCheck} />
-                  </button>
-                  <button
-                    onClick={toggleEditing}
-                    className='cancelBtn edit_feed_button'>
-                    <FontAwesomeIcon icon={faTimes} />
-                  </button>
-                </div>
-              </form>
-            </>
-          ) : (
-            <span class='feed_text'>{nweetObj.text}</span>
-          )}
-          {nweetObj.attachmentUrl && (
-            <LazyImageLoading
-              image={nweetObj.attachmentUrl}
-              className='feed_img'
-            />
-          )}
-        </section>
-
-        <section className='feed_actions'>
-          <button onClick={() => seeMoreComments()}>
-            <FontAwesomeIcon icon={faComment} />
-            <span>{reply && reply.length}</span>
-          </button>
-          <button>
-            <FontAwesomeIcon icon={faShare} />
-          </button>
-        </section>
 
         {/* <form onSubmit={onReplySubmit}>
             <input type='text' value={newReply} onChange={onNewReplyChange} />

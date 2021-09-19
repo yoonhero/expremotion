@@ -11,7 +11,9 @@ const Navigation = ({ screenName }) => (
       <li>
         <Link to='/' class=''>
           <div className='column nav-items-li'>
-            <FontAwesomeIcon icon={faHome} size='lg' />
+            <span>
+              <FontAwesomeIcon icon={faHome} size='lg' />
+            </span>
             {/* <span>Home</span> */}
             {screenName === "home" && <div className='dot'></div>}
           </div>
@@ -21,7 +23,9 @@ const Navigation = ({ screenName }) => (
         <Link to='/search' class=''>
           {/* <span>Search</span> */}
           <div className='column nav-items-li'>
-            <FontAwesomeIcon icon={faSearch} size='lg' />
+            <span>
+              <FontAwesomeIcon icon={faSearch} size='lg' />
+            </span>
             {screenName === "search" && <div className='dot'></div>}
           </div>
         </Link>
@@ -32,7 +36,9 @@ const Navigation = ({ screenName }) => (
             {userObj.displayName ? `${userObj.displayName}` : "Profile"}
           </span> */}
           <div className='column nav-items-li'>
-            <FontAwesomeIcon icon={faUser} size='lg' />
+            <span>
+              <FontAwesomeIcon icon={faUser} size='lg' />
+            </span>
             {screenName === "profile" && <div className='dot'></div>}
           </div>
         </Link>
