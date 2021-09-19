@@ -134,7 +134,6 @@ export default ({ refreshUser, userObj }) => {
           <input
             onChange={onChange}
             type='text'
-            autoFocus
             placeholder='Username'
             value={newDisplayName}
             className='formInput'

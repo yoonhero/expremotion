@@ -169,7 +169,6 @@ const NweetFactory = ({ userObj }) => {
             type='text'
             placeholder="What's on your mind?"
             maxLength={320}
-            autoFocus
           />
         </div>
         <input

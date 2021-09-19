@@ -44,7 +44,9 @@ const Comment = ({ userObj }) => {
   }, []);
 
   return (
-    <article className='column' style={{ width: "100%" }}>
+    <article
+      className='column'
+      style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
       <form onSubmit={onReplySubmit} className='column'>
         <input
           className='comment_input'

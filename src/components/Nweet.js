@@ -217,7 +217,6 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
                       placeholder='Edit your Feed'
                       value={newNweet}
                       required
-                      autoFocus
                       onChange={onChange}
                       className='edit_input'
                     />

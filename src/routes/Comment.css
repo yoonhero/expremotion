@@ -52,6 +52,7 @@
 
 .comments_container {
   width: 100%;
+  max-width: 780px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -73,10 +74,10 @@
 }
 
 .username {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--main-black);
   font-weight: 500;
-  padding: 5px;
+  padding: 8px;
 }
 
 .message {
@@ -90,6 +91,12 @@
   overflow: hidden;
   font-size: 16px;
   margin: 0px 10px;
+}
+
+@media only screen and (min-width: 900px) {
+  .comment_input {
+    bottom: 0px;
+  }
 }
 
 /* 
