@@ -21,16 +21,17 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
           </Route>
         )}
         <Route exact path='/'>
-          <LoggedInLayout></LoggedInLayout>
-          <Home userObj={userObj} />
+          <LoggedInLayout screenName='home'>
+            <Home userObj={userObj} />
+          </LoggedInLayout>
         </Route>
         <Route path='/profile'>
-          <LoggedInLayout>
+          <LoggedInLayout screenName='profile'>
             <Profile userObj={userObj} refreshUser={refreshUser} />
           </LoggedInLayout>
         </Route>
         <Route path='/search'>
-          <LoggedInLayout>
+          <LoggedInLayout screenName='search'>
             <SearchUser userObj={userObj} />
           </LoggedInLayout>
         </Route>

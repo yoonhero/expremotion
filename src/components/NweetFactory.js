@@ -182,32 +182,42 @@ const NweetFactory = ({ userObj }) => {
           }}
         />
         <div className='row factory__actions'>
-          {attachment ? (
-            <div className='factoryForm__attachment'>
-              <img
-                src={attachment}
-                style={{
-                  backgroundImage: attachment,
-                }}
-              />
-              <div className='factoryForm__clear' onClick={onClearAttachment}>
-                <FontAwesomeIcon icon={faTrash} />
-              </div>
-            </div>
-          ) : (
+          {!attachment && (
             <label for='attach-file' className='factoryInput__label'>
-              <FontAwesomeIcon icon={faImage} />
+              <FontAwesomeIcon
+                icon={faImage}
+                color='rgb(190, 190, 190)'
+                className='svg_button'
+              />
             </label>
           )}
           <span
             className='factoryInput__label'
             onClick={() => setEmoji(!choseEmoji)}>
-            <FontAwesomeIcon icon={faSmile} />
+            <FontAwesomeIcon
+              icon={faSmile}
+              color='rgb(190, 190, 190)'
+              className='svg_button'
+            />
           </span>
         </div>
         {choseEmoji && (
           <div className='emoji_container'>
             <Picker onEmojiClick={onEmojiClick} />
+          </div>
+        )}
+
+        {attachment && (
+          <div className='factoryForm__attachment'>
+            <img
+              src={attachment}
+              style={{
+                backgroundImage: attachment,
+              }}
+            />
+            <div className='factoryForm__clear' onClick={onClearAttachment}>
+              <FontAwesomeIcon icon={faTrash} />
+            </div>
           </div>
         )}
 

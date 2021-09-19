@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 
-export const LoggedInLayout = ({ children }) => {
+export const LoggedInLayout = ({ children, screenName }) => {
   return (
     <main
       style={{
@@ -12,7 +12,7 @@ export const LoggedInLayout = ({ children }) => {
         justifyContent: "center",
       }}>
       {/* <Header /> */}
-      <Navigation />
+      <Navigation screenName={screenName} />
       {children}
     </main>
   );

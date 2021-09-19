@@ -23,3 +23,14 @@
   color: var(--main-black);
   padding: 5px;
 }
+
+.nav-items-li {
+  gap: 3px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--main-black);
+}
