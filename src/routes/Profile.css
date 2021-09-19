@@ -70,3 +70,8 @@
   border-radius: 50%;
   font-size: 18px;
 }
+
+.logOut:hover {
+  background: var(--main-red);
+  color: var(--white);
+}

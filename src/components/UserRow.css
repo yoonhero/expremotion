@@ -32,8 +32,13 @@
 }
 
 .unfollow {
-  background-color: var(--main-blue);
+  background: var(--main-blue);
   color: var(--white);
+}
+
+.unfollow:hover {
+  color: var(--main-blue);
+  background: var(--white);
 }
 
 .follow {
@@ -41,7 +46,17 @@
   background: var(--white);
 }
 
+.follow:hover {
+  background: var(--main-blue);
+  color: var(--white);
+}
+
 .profile {
   color: var(--white);
   background: var(--main-green);
+}
+
+.profile:hover {
+  background: var(--white);
+  color: var(--main-green);
 }
