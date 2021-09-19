@@ -8,19 +8,29 @@ import {
   faPlus,
   faTimes,
   faTrash,
+  faSmile,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Upload.css";
 import { useHistory } from "react-router";
+import Picker from "emoji-picker-react";
 
 const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [attachment, setAttachment] = useState("");
   const [emotion, setEmotion] = useState("happy");
   const history = useHistory();
+  const [chosenEmoji, setChosenEmoji] = useState(null);
+  const [choseEmoji, setEmoji] = useState(false);
 
   const onChangeEmotion = (event) => {
     setEmotion(event.target.value);
   };
+
+  useEffect(() => {
+    if (chosenEmoji !== null) {
+      setNweet((nweet) => nweet + chosenEmoji?.emoji);
+    }
+  }, [chosenEmoji]);
 
   const onSubmit = async (event) => {
     if (nweet === "") {
@@ -130,6 +140,10 @@ const NweetFactory = ({ userObj }) => {
     return <div></div>;
   };
 
+  const onEmojiClick = (event, emojiObject) => {
+    setChosenEmoji(emojiObject);
+  };
+
   return (
     <>
       <form onSubmit={onSubmit} className='column factoryForm'>
@@ -167,22 +181,34 @@ const NweetFactory = ({ userObj }) => {
             display: "none",
           }}
         />
-        {attachment ? (
-          <div className='factoryForm__attachment'>
-            <img
-              src={attachment}
-              style={{
-                backgroundImage: attachment,
-              }}
-            />
-            <div className='factoryForm__clear' onClick={onClearAttachment}>
-              <FontAwesomeIcon icon={faTrash} />
+        <div className='row factory__actions'>
+          {attachment ? (
+            <div className='factoryForm__attachment'>
+              <img
+                src={attachment}
+                style={{
+                  backgroundImage: attachment,
+                }}
+              />
+              <div className='factoryForm__clear' onClick={onClearAttachment}>
+                <FontAwesomeIcon icon={faTrash} />
+              </div>
             </div>
+          ) : (
+            <label for='attach-file' className='factoryInput__label'>
+              <FontAwesomeIcon icon={faImage} />
+            </label>
+          )}
+          <span
+            className='factoryInput__label'
+            onClick={() => setEmoji(!choseEmoji)}>
+            <FontAwesomeIcon icon={faSmile} />
+          </span>
+        </div>
+        {choseEmoji && (
+          <div className='emoji_container'>
+            <Picker onEmojiClick={onEmojiClick} />
           </div>
-        ) : (
-          <label for='attach-file' className='factoryInput__label'>
-            <FontAwesomeIcon icon={faImage} />
-          </label>
         )}
 
         <button type='submit' className='factoryInput__arrow'>

@@ -116,3 +116,8 @@ select {
   max-width: 480px;
   min-height: 150px;
 }
+
+.factory__actions {
+  margin: 10px;
+  gap: 10px;
+}
