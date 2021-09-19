@@ -138,6 +138,13 @@
 .nweet__actions {
   padding: 0 20px;
 }
+/* 
+.nweet__actions span:hover {
+  padding: 5px;
+  border-radius: 50%;
+  color: #1da1f2;
+  background-color: rgb(230, 243, 255);
+} */
 
 .modal_contents {
   padding: 0;
@@ -171,4 +178,9 @@
 
 .last_btn {
   border-radius: 0 0 20px 20px;
+}
+
+.date {
+  font-size: 13px;
+  font-weight: 300;
 }

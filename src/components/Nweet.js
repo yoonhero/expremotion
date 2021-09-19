@@ -42,6 +42,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const [avatar, setAvatar] = useState("");
   const history = useHistory();
   const [modal, setModal] = useState(false);
+  const [createdAt, setCreatedAt] = useState("");
 
   const toggleAction = () => setModal((modal) => !modal);
 
@@ -65,6 +66,8 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
       });
       setReply(allReply);
     });
+    let date = new Date(nweetObj.createdAt);
+    setCreatedAt(`${date.getMonth()}월 ${date.getDate()}일`);
   }, []);
 
   useEffect(async () => {
@@ -167,6 +170,8 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
               }
             />
             <span className='username'>{nweetObj.username}</span>
+            <span className=''>·</span>
+            <h4 className='date'>{createdAt}</h4>
           </div>
           <div clsasName=' row'>
             {isOwner && (
