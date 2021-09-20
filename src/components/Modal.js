@@ -11,11 +11,11 @@ function Modal({ className, visible, children }) {
   //   }
   // }, [])
 
-  const changeVisible = () => {
-    console.log(visible);
-    visible = false;
-    console.log(visible);
-  };
+  // const changeVisible = () => {
+  //   console.log(visible);
+  //   visible = false;
+  //   console.log(visible);
+  // };
 
   return (
     <>

@@ -14,7 +14,6 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
       .ref(`users/${userObj.uid}/follow`)
       .once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-          console.log(childSnapshot.val());
           if (childSnapshot.val() == uid) {
             setFollows(true);
             return;
