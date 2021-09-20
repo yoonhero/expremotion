@@ -11,7 +11,9 @@
 결과물 링크 : https://expremotion.netlify.app/
 
 <figure class="video_container">
-  <iframe src="https://user-images.githubusercontent.com/57530375/133958553-8f3ff493-0334-45da-a83c-01ffea5b930c.mov" frameborder="0" allowfullscreen="true"> </iframe>
+  <video controls="true" allowfullscreen="true" poster="">
+    <source src="https://user-images.githubusercontent.com/57530375/133958553-8f3ff493-0334-45da-a83c-01ffea5b930c.mov" type="video/mp4">
+  </video>
 </figure>
 
 ## 2. 자기소개
@@ -59,6 +61,18 @@
   <img width="1161" alt="스크린샷 2021-09-20 13 46 34" src="https://user-images.githubusercontent.com/57530375/133958893-b5657e60-1a78-4a53-8316-6bd640688217.png">
 
   이 서비스의 가장 근본적인 목적이라고 할 수도 있는 감정표현을 하기 위해서 특별한 피드 작성 페이지를 만들었고 인스타그램 같은 UI/UX 로 유저는 글의 내용을 수정하거나 삭제할 수 있도록 하였습니다.
+
+  <figure class="video_container">
+    <video controls="true" allowfullscreen="true" poster="">
+      <source src="https://user-images.githubusercontent.com/57530375/133961546-30eb87a7-e2d0-4dd7-84ab-ab275f9c1721.mov" type="video/mp4">
+    </video>
+  </figure>
+
+  <figure class="video_container">
+      <video controls="true" allowfullscreen="true" >
+        <source src="https://user-images.githubusercontent.com/57530375/133961535-0b217e66-2fd7-4fe1-a745-297fbab34e8c.mov" type="video/mp4">
+      </video>
+  </figure>
 
 - 3-2-2 이모지 추가
 
