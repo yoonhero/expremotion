@@ -56,6 +56,7 @@ const Comment = ({ userObj }) => {
           placeholder='Write Comment!'
           value={newReply}
           onChange={onNewReplyChange}
+          maxLength={100}
         />
       </form>
       <section className='comments_container'>
