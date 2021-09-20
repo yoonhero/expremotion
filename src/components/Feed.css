@@ -25,9 +25,8 @@
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 10px;
-  padding: 10px;
-  padding-left: 0;
+  gap: 5px;
+  padding: 10px 0;
 }
 
 .avatar {
@@ -36,6 +35,7 @@
   height: 50px;
   border-radius: 50%;
   background-position: cover;
+  background: #fff;
   border: 1px solid var(--main-border);
 }
 
@@ -46,6 +46,12 @@
   font-weight: 600;
   text-align: center;
 }
+/* 
+@media only screen and (max-width: 780px) {
+  .username {
+    font-size: 15px;
+  }
+} */
 
 .main_section {
   padding: 15px;

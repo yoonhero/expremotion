@@ -452,7 +452,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
             <div className='feed_header'>
               <div className='user_info'>
                 <span className='username'>{nweetObj.username}</span>
-                <span className=''>·</span>
+                {/* <span className=''>·</span> */}
                 <h4 className='date'>{createdAt}</h4>
               </div>
 
