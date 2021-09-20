@@ -29,6 +29,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
+import styled, { keyframes } from "styled-components";
 
 const customStyles = {
   content: {
@@ -43,6 +44,91 @@ const customStyles = {
     background: "transparent",
   },
 };
+
+const dropping = keyframes`
+  0% {
+		transform: translateY(0px) rotate(-90deg);
+    
+	}
+	60% {
+		transform: translateY(15px) rotate(-80deg);
+	}
+	100% {
+		transform: translateY(5px) rotate(-95deg);
+	}
+`;
+
+const firstDropping = keyframes`
+0% {
+  transform: translateY(0px) rotate(-90deg);
+  opacity: 1;  
+}
+60% {
+  transform: translateY(15px) rotate(-80deg);
+  opacity: 0.8;
+}
+100% {
+  transform: translateY(2px) rotate(-95deg);
+  display: none;
+  opacity: 0;
+}
+`;
+
+const secondDropping = keyframes`
+0% {
+  
+  transform: translateY(3px) rotate(-95deg);
+  opacity: 1;
+}
+40% {
+  transform: translateY(10px) rotate(-80deg);
+  opacity: 0.8
+}
+100% {
+  transform: translateY(2px) rotate(-90deg);
+  opacity: 0;
+}
+`;
+
+const thirdDropping = keyframes`
+0% {
+  
+  transform: translateY(1px) rotate(-95deg);
+  opacity: 1;
+}
+50% {
+  transform: translateY(13px) rotate(-80deg);
+  opacity: 0.8
+}
+100% {
+  transform: translateY(4px) rotate(-90deg);
+  opacity: 0;
+}
+`;
+
+const SadMessage = styled.div`
+  position: relative;
+  width: 100%;
+  top: -10px;
+  font-size: 10px;
+  svg {
+    position: relative;
+    width: 16px;
+    top: 0px;
+    transform: rotate(-90deg);
+  }
+  .first {
+    animation: ${firstDropping} 2s ease infinite;
+  }
+
+  .second {
+    animation: ${secondDropping} 2s ease infinite;
+  }
+
+  .third {
+    animation: ${thirdDropping} 2s ease infinite;
+  }
+`;
 
 const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const [editing, setEditing] = useState(false);
@@ -177,7 +263,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
           </div>
         </Modal>
         <div className='main_feed'>
-          <div className='sad'>
+          <div>
             {/* happy sad soso funny shocked angry */}
             <LazyImageLoading
               className='avatar'
@@ -187,6 +273,66 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
                   : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
               }
             />
+            {nweetObj.emotion === "sad" ? (
+              <SadMessage>
+                <svg
+                  className='first'
+                  width='10px'
+                  height='20px'
+                  viewBox='0 0 482 297'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <ellipse
+                    rx='106.76'
+                    ry='143.996'
+                    transform='matrix(0.0193094 0.999814 -0.999933 0.0115742 182.388 146.414)'
+                    fill='#3A93E4'
+                  />
+                  <path
+                    d='M417.394 122.611C437.234 130.604 437.799 158.471 418.292 166.898L268.946 231.416C253.271 238.188 235.602 226.768 235.255 209.639L232.706 83.9246C232.359 66.796 249.557 54.9911 265.5 61.4144L417.394 122.611Z'
+                    fill='#3A93E4'
+                  />
+                </svg>
+                <svg
+                  className='second'
+                  width='10px'
+                  height='20px'
+                  viewBox='0 0 482 297'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <ellipse
+                    rx='106.76'
+                    ry='143.996'
+                    transform='matrix(0.0193094 0.999814 -0.999933 0.0115742 182.388 146.414)'
+                    fill='#3A93E4'
+                  />
+                  <path
+                    d='M417.394 122.611C437.234 130.604 437.799 158.471 418.292 166.898L268.946 231.416C253.271 238.188 235.602 226.768 235.255 209.639L232.706 83.9246C232.359 66.796 249.557 54.9911 265.5 61.4144L417.394 122.611Z'
+                    fill='#3A93E4'
+                  />
+                </svg>
+                <svg
+                  className='third'
+                  width='10px'
+                  height='20px'
+                  viewBox='0 0 482 297'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <ellipse
+                    rx='106.76'
+                    ry='143.996'
+                    transform='matrix(0.0193094 0.999814 -0.999933 0.0115742 182.388 146.414)'
+                    fill='#3A93E4'
+                  />
+                  <path
+                    d='M417.394 122.611C437.234 130.604 437.799 158.471 418.292 166.898L268.946 231.416C253.271 238.188 235.602 226.768 235.255 209.639L232.706 83.9246C232.359 66.796 249.557 54.9911 265.5 61.4144L417.394 122.611Z'
+                    fill='#3A93E4'
+                  />
+                </svg>
+              </SadMessage>
+            ) : (
+              <div>other feeling</div>
+            )}
           </div>
 
           <div className='main_content'>
