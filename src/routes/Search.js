@@ -33,24 +33,21 @@ const SearchUser = ({ userObj }) => {
   useEffect(async () => {
     // search
     // childData.username.toLowerCase().includes("ggg")
-    await realtimeDatabase
-      .ref("users")
-      .limitToFirst(15)
-      .once("value", function (snapshot) {
-        let searchResult = [];
-        snapshot.forEach(function (childSnapshot) {
-          var childData = childSnapshot.val();
-          var childKey = childSnapshot.key;
-          if (true) {
-            childData.uid = childKey;
-            searchResult.push(childData);
-          } else {
-            return;
-          }
-        });
-        const jsonedResult = JSON.stringify(searchResult);
-        setUsers(jsonedResult);
+    await realtimeDatabase.ref("users").once("value", function (snapshot) {
+      let searchResult = [];
+      snapshot.forEach(function (childSnapshot) {
+        var childData = childSnapshot.val();
+        var childKey = childSnapshot.key;
+        if (true) {
+          childData.uid = childKey;
+          searchResult.push(childData);
+        } else {
+          return;
+        }
       });
+      const jsonedResult = JSON.stringify(searchResult);
+      setUsers(jsonedResult);
+    });
   }, []);
 
   const UsersRow = () => {
