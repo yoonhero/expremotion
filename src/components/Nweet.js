@@ -30,6 +30,7 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import styled, { keyframes } from "styled-components";
+import { Helmet } from "react-helmet";
 
 const customStyles = {
   content: {
@@ -124,10 +125,60 @@ const SadMessage = styled.div`
   .second {
     animation: ${secondDropping} 2s ease infinite;
   }
-
   .third {
     animation: ${thirdDropping} 2s ease infinite;
   }
+`;
+
+const spin = keyframes`
+
+100% { 
+  -webkit-transform: rotate(360deg); 
+  transform:rotate(360deg); 
+} `;
+
+const HappyMessage = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 12.5px;
+  z-index: -1;
+  img {
+    z-index: -1;
+    width: 65px;
+    height: auto;
+
+    -webkit-animation: ${spin} 6s linear infinite;
+    -moz-animation: ${spin} 6s linear infinite;
+    animation: ${spin} 6s linear infinite;
+  }
+`;
+
+const FireTextColorChange = keyframes`
+  0%{
+    color: #FCFE09;
+  }
+  50% {
+    color: #FFC629;
+  }
+  60%{
+    color: #AA1404;
+  }
+  100%{
+    color: #FFC629;
+  }
+`;
+
+const LottiePlayer = styled.div`
+  position: relative;
+  display: flex;
+  padding: 0;
+  color: black;
+  overflow: hidden;
+  font-size: 16px;
+  margin: 0px;
+  max-width: 60px;
 `;
 
 const Nweet = ({ nweetObj, isOwner, userObj }) => {
@@ -235,6 +286,9 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
   return (
     <div className='feed'>
       <>
+        <Helmet>
+          <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script>
+        </Helmet>
         <Modal
           isOpen={modal}
           onRequestClose={toggleAction}
@@ -263,7 +317,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
           </div>
         </Modal>
         <div className='main_feed'>
-          <div>
+          <div className='column'>
             {/* happy sad soso funny shocked angry */}
             <LazyImageLoading
               className='avatar'
@@ -330,9 +384,68 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
                   />
                 </svg>
               </SadMessage>
+            ) : nweetObj.emotion === "happy" ? (
+              <HappyMessage>
+                <img src='./sun.svg' />
+              </HappyMessage>
+            ) : nweetObj.emotion === "angry" ? (
+              <LottiePlayer>
+                <lottie-player
+                  src='https://assets8.lottiefiles.com/private_files/lf30_boznudpc.json'
+                  background='transparent'
+                  speed='1'
+                  loop
+                  autoplay></lottie-player>
+              </LottiePlayer>
+            ) : nweetObj.emotion === "soso" ? (
+              // <span className='tracking-out-expand-fwd column'>...</span>
+              <LottiePlayer>
+                <lottie-player
+                  src='https://assets9.lottiefiles.com/datafiles/bEYvzB8QfV3EM9a/data.json'
+                  background='transparent'
+                  speed='1'
+                  loop
+                  autoplay></lottie-player>
+              </LottiePlayer>
+            ) : // <lottie-player
+            //   src='https://assets6.lottiefiles.com/packages/lf20_CCQQ7b.json'
+            //   background='transparent'
+            //   speed='1'
+
+            //   loop
+            //   autoplay></lottie-player>
+            nweetObj.emotion === "shocked" ? (
+              <LottiePlayer>
+                <lottie-player
+                  src='https://assets3.lottiefiles.com/private_files/lf30_9ce2djcy.json'
+                  background='transparent'
+                  speed='1'
+                  loop
+                  autoplay></lottie-player>
+              </LottiePlayer>
             ) : (
-              <div>other feeling</div>
+              nweetObj.emotion === "funny" && (
+                <LottiePlayer>
+                  <lottie-player
+                    src='https://assets10.lottiefiles.com/packages/lf20_ym5ntyv8.json'
+                    background='transparent'
+                    speed='1'
+                    loop
+                    autoplay></lottie-player>
+                </LottiePlayer>
+              )
             )}
+            {/* {nweetObj.emotion === "shocked" && (
+                <ShockedMessage>
+                  <iframe
+                    src='https://giphy.com/embed/vQqeT3AYg8S5O'
+                    width='300'
+                    height='30'
+                    frameBorder='0'
+                    class='giphy-embed'
+                    allowFullScreen></iframe>
+                </ShockedMessage>
+              )} */}
           </div>
 
           <div className='main_content'>
@@ -342,6 +455,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
                 <span className=''>·</span>
                 <h4 className='date'>{createdAt}</h4>
               </div>
+
               <div clsasName=' row'>
                 {isOwner && (
                   <div class='nweet__actions'>
