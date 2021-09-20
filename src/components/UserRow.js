@@ -9,6 +9,8 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
   const [isMe, setIsMe] = useState(false);
   const history = useHistory();
 
+  console.log(avatar);
+
   const getButton = async () => {
     await realtimeDatabase
       .ref(`users/${userObj.uid}/follow`)
@@ -67,7 +69,7 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
         <LazyImageLoading
           className='avatar'
           image={
-            avatar != ""
+            avatar != undefined
               ? avatar
               : `https://avatars.dicebear.com/api/croodles-neutral/:${username}.svg`
           }
