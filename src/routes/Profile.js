@@ -10,11 +10,15 @@ import "./Profile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import LazyImageLoading from "../components/LazyImageLoading";
+import { useParams } from "react-router";
 
 export default ({ refreshUser, userObj }) => {
   const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [attachment, setAttachment] = useState("");
+  const [isMe, setIsMe] = useState(false);
+  const [user, setUser] = useState([]);
+  const { uid } = useParams();
 
   useEffect(() => {
     // dbService
@@ -28,18 +32,24 @@ export default ({ refreshUser, userObj }) => {
     //     }
     //   });
 
-    realtimeDatabase
-      .ref("users/" + userObj.uid)
-      .once("value", function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-          var childKey = childSnapshot.key;
-          var childData = childSnapshot.val();
-          if (childKey === "avatar") {
-            setAttachment(childData);
-          }
-        });
+    realtimeDatabase.ref("users/" + uid).once("value", function (snapshot) {
+      let userData = snapshot.val();
+      setIsMe(uid === userData.uid);
+      setUser(userData);
+      snapshot.forEach(function (childSnapshot) {
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
+        if (childKey === "avatar") {
+          setAttachment(childData);
+        }
       });
+    });
   }, []);
+
+  useEffect(() => {
+    console.log(user);
+    console.log(isMe);
+  }, [user]);
 
   const onLogOutClick = () => {
     authService.signOut();

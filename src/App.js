@@ -20,6 +20,7 @@ function App() {
         realtimeDatabase.ref("users/" + user.uid).update({
           username: user.displayName ? user.displayName : user.email,
           email: user.email,
+          uid: user.uid,
         });
       } else {
         setUserObj(null);

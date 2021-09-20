@@ -9,8 +9,6 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
   const [isMe, setIsMe] = useState(false);
   const history = useHistory();
 
-  console.log(avatar);
-
   const getButton = async () => {
     await realtimeDatabase
       .ref(`users/${userObj.uid}/follow`)
