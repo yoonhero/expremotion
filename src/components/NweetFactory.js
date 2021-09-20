@@ -13,6 +13,7 @@ import {
 import "./Upload.css";
 import { useHistory } from "react-router";
 import Picker from "emoji-picker-react";
+import { Header } from "./Header";
 
 const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
@@ -146,6 +147,7 @@ const NweetFactory = ({ userObj }) => {
 
   return (
     <>
+      <Header screenName={"Express Your Emotion"} />
       <form onSubmit={onSubmit} className='column factoryForm'>
         <div className='column'>
           <div className='gif_player'>{yourFeeling()}</div>

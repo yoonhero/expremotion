@@ -177,14 +177,18 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
           </div>
         </Modal>
         <div className='main_feed'>
-          <LazyImageLoading
-            className='avatar'
-            image={
-              avatar != ""
-                ? avatar
-                : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
-            }
-          />
+          <div className='sad'>
+            {/* happy sad soso funny shocked angry */}
+            <LazyImageLoading
+              className='avatar'
+              image={
+                avatar != ""
+                  ? avatar
+                  : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
+              }
+            />
+          </div>
+
           <div className='main_content'>
             <div className='feed_header'>
               <div className='user_info'>
@@ -251,6 +255,8 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
               <button>
                 <FontAwesomeIcon icon={faShare} />
               </button>
+              {/* <div className='addthis_inline_share_toolbox'></div> */}
+
               {/* <FacebookShareButton url={window.location}>hi</FacebookShareButton>
           <LineShareButton url={window.location}>line</LineShareButton>
 

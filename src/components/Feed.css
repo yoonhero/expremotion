@@ -168,9 +168,10 @@
 }
 
 .modal_button {
-  border: 0.5px solid var(--main-border);
+  border: none;
   color: rgb(164 156 156);
   background-color: var(--white);
+  border: 0.25px solid var(--main-border);
   width: 100%;
   font-size: 16px;
   padding: 15px;
@@ -187,10 +188,12 @@
 
 .first_btn {
   border-radius: 20px 20px 0 0;
+  border: 0.5px solid var(--main-border);
 }
 
 .last_btn {
   border-radius: 0 0 20px 20px;
+  border: 0.5px solid var(--main-border);
 }
 
 .date {
@@ -202,4 +205,16 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+}
+.happy {
+}
+.sad {
+}
+.soso {
+}
+.funny {
+}
+.shocked {
+}
+.angry {
 }

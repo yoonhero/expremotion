@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Header } from "../components/Header";
 import { realtimeDatabase } from "../fbase";
 import "./Comment.css";
 
@@ -47,6 +48,7 @@ const Comment = ({ userObj }) => {
     <article
       className='column'
       style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+      <Header screenName={"Comments"} />
       <form onSubmit={onReplySubmit} className='column'>
         <input
           className='comment_input'
