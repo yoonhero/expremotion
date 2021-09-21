@@ -140,21 +140,22 @@ export default ({ refreshUser, userObj }) => {
   const onClearAttachment = () => setAttachment(null);
 
   const getFollowing = async () => {
-    let follow = {};
-    await realtimeDatabase
+    return await realtimeDatabase
       .ref("users/" + uid)
       .once("value", function (snapshot) {
         let userData = snapshot.val();
-        follow = userData.follow;
-      });
-    return follow.map(async (follow) => {
-      await realtimeDatabase
-        .ref("users/" + follow)
-        .once("value", function (snapshot) {
-          let userData = snapshot.val();
-          return <UserRow {...userData} userObj={userObj} />;
+        if (userData.length === 0 || userData === undefined) {
+          return;
+        }
+        return userData?.follow.map(async (follow) => {
+          await realtimeDatabase
+            .ref("users/" + follow)
+            .once("value", function (snapshot) {
+              let userData = snapshot.val();
+              return <UserRow {...userData} userObj={userObj} />;
+            });
         });
-    });
+      });
   };
 
   return (
