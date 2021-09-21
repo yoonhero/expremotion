@@ -8,7 +8,7 @@ import {
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 import LazyImageLoading from "../components/LazyImageLoading";
 import { useParams } from "react-router";
 import Nweet from "../components/Nweet";
@@ -22,6 +22,7 @@ export default ({ refreshUser, userObj }) => {
   const [username, setUsername] = useState("");
   const [userFeed, setUserFeed] = useState([]);
   const { uid } = useParams();
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(async () => {
     // dbService
@@ -76,7 +77,6 @@ export default ({ refreshUser, userObj }) => {
               unq.push(element);
             }
           });
-          console.log(unq);
           return unq;
         });
       });
@@ -139,75 +139,112 @@ export default ({ refreshUser, userObj }) => {
 
   const onClearAttachment = () => setAttachment(null);
 
-  const getFollowing = async () => {
-    return await realtimeDatabase
-      .ref("users/" + uid)
-      .once("value", function (snapshot) {
-        let userData = snapshot.val();
-        if (userData.length === 0 || userData === undefined) {
-          return;
-        }
-        return userData?.follow.map(async (follow) => {
-          await realtimeDatabase
-            .ref("users/" + follow)
-            .once("value", function (snapshot) {
-              let userData = snapshot.val();
-              return <UserRow {...userData} userObj={userObj} />;
-            });
-        });
-      });
+  const GetFollowing = async () => {
+    // return await realtimeDatabase
+    //   .ref("users/" + uid)
+    //   .once("value", function (snapshot) {
+    //     let userData = snapshot.val();
+    //     if (userData.length === 0 || userData === undefined) {
+    //       return;
+    //     }
+    //     return userData?.follow.map(async (follow) => {
+    //       return await realtimeDatabase
+    //         .ref("users/" + follow)
+    //         .once("value", function (snapshot) {
+    //           let userData = snapshot.val();
+    //           return <UserRow {...userData} userObj={userObj} />;
+    //         });
+    //     });
+    //   });
+    return <h1>follos</h1>;
   };
 
   return (
     <div className='profileContainer column'>
-      <form onSubmit={onSubmit} className='profileForm column'>
-        <div className='profileImg_container column'>
-          <label for='attach-file' className='PofileInput__label'>
-            <div className='column'>
-              {attachment ? (
-                <LazyImageLoading
-                  width={200}
-                  className='profileImg'
-                  image={attachment}
-                />
-              ) : (
-                <LazyImageLoading
-                  className='profileImg'
-                  image={`https://avatars.dicebear.com/api/croodles-neutral/:${userObj.displayName}.svg`}
-                />
-              )}
-              <span className='span_upload'>Change Avatar</span>
-            </div>
-          </label>
+      {isEditing && isMe ? (
+        <form onSubmit={onSubmit} className='profileForm column'>
+          <div className='profileImg_container column'>
+            <label for='attach-file' className='PofileInput__label'>
+              <div className='column'>
+                {attachment ? (
+                  <LazyImageLoading className='profileImg' image={attachment} />
+                ) : (
+                  <LazyImageLoading
+                    className='profileImg'
+                    image={`https://avatars.dicebear.com/api/croodles-neutral/:${userObj.displayName}.svg`}
+                  />
+                )}
+                <span className='span_upload'>Change Avatar</span>
+              </div>
+            </label>
 
-          <input
-            id='attach-file'
-            type='file'
-            accept='image/*'
-            onChange={onFileChange}
-            style={{
-              display: "none",
-            }}
-          />
+            <input
+              id='attach-file'
+              type='file'
+              accept='image/*'
+              onChange={onFileChange}
+              style={{
+                display: "none",
+              }}
+            />
+          </div>
+
+          <div className='column username_container'>
+            <input
+              onChange={onChange}
+              type='text'
+              placeholder='Username'
+              value={newDisplayName}
+              className='formInput'
+            />
+            <input type='submit' value='Update' className='formBtn' />
+          </div>
+
+          <button
+            className='cancel_button'
+            onClick={() => setIsEditing((edit) => !edit)}>
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
+        </form>
+      ) : (
+        <div className='column main_profile_container'>
+          <div className='row top_column'>
+            {attachment ? (
+              <LazyImageLoading className='profile_avatar' image={attachment} />
+            ) : (
+              <LazyImageLoading
+                className='profile_avatar'
+                image={`https://avatars.dicebear.com/api/croodles-neutral/:${userObj.displayName}.svg`}
+              />
+            )}
+            {isMe && (
+              <button
+                className='edit_button'
+                onClick={() => setIsEditing((edit) => !edit)}>
+                Edit Profile
+              </button>
+            )}
+            {!isMe && (
+              <button
+                className='edit_button'
+                onClick={() => alert("coming soon...")}>
+                follow
+              </button>
+            )}
+          </div>
+          <div className='column user_info_container'>
+            <h1>{username}</h1>
+            <span>@{uid}</span>
+            {/* <button>dm</button> */}
+          </div>
         </div>
+      )}
 
-        <div className='column username_container'>
-          <input
-            onChange={onChange}
-            type='text'
-            placeholder='Username'
-            value={newDisplayName}
-            className='formInput'
-          />
-          <input type='submit' value='Update' className='formBtn' />
-        </div>
-      </form>
-
-      <button onClick={onLogOutClick} className='logOut'>
-        <FontAwesomeIcon icon={faSignOutAlt} />
-      </button>
-
-      <div className='following column'>{getFollowing()}</div>
+      {isMe && (
+        <button onClick={onLogOutClick} className='logOut'>
+          <FontAwesomeIcon icon={faSignOutAlt} />
+        </button>
+      )}
 
       <div className='feeds column'>
         <h1>{username}'s feed</h1>

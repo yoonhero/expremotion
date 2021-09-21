@@ -5,6 +5,7 @@
 .profileForm {
   width: 100%;
   padding: 10px;
+  position: relative;
 }
 
 .profileImg_container {
@@ -14,13 +15,24 @@
 }
 
 .profileImg {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background-position: cover;
   border: 1px solid var(--main-border);
   margin: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: white;
+}
+
+.profile_avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-position: cover;
+  border: 1px solid var(--main-border);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: white;
 }
 
 .username_container {
@@ -95,4 +107,74 @@
 .feeds h1 {
   font-size: 20px;
   font-weight: 600;
+}
+
+.edit_button {
+  background: var(--white);
+  border: 2px solid var(--main-border);
+  text-align: center;
+  padding: 8px 20px;
+  color: var(--main-black);
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.edit_button:hover {
+  background-color: rgba(15, 20, 25, 0.1);
+}
+
+.cancel_button {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: var(--white);
+  border: 2px solid var(--main-border);
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-black);
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.cancel_button:hover {
+  background-color: rgba(15, 20, 25, 0.1);
+}
+
+.main_profile_container {
+  width: 100%;
+  max-width: 780px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.top_column {
+  width: 100%;
+  padding: 10px;
+  justify-content: space-between !important;
+  background: linear-gradient(0deg, transparent 20%, #fff1e6 80%);
+}
+
+.user_info_container {
+  width: 100%;
+  align-items: flex-start !important;
+  padding: 20px;
+}
+
+.user_info_container h1 {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 2px;
+}
+
+.user_info_container span {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--main-black);
+  padding: 1px;
 }
