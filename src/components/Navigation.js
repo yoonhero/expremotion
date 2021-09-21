@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { faHome, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faHome,
+  faSearch,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import "./Navigation.css";
 
 const Navigation = ({ screenName, userObj }) => {
@@ -28,6 +33,17 @@ const Navigation = ({ screenName, userObj }) => {
                 <FontAwesomeIcon icon={faSearch} size='lg' />
               </span>
               {screenName === "search" && <div className='dot'></div>}
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link to='/notification'>
+            {/* <span>Search</span> */}
+            <div className='column nav-items-li'>
+              <span>
+                <FontAwesomeIcon icon={faHeart} size='lg' />
+              </span>
+              {screenName === "notification" && <div className='dot'></div>}
             </div>
           </Link>
         </li>

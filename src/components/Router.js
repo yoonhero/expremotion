@@ -7,6 +7,7 @@ import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Comment from "../routes/Comment";
 import Uploads from "../routes/Uploads";
+import Notification from "../routes/Notification";
 import { LoggedInLayout, LoggedOutLayout } from "../Layout";
 
 const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
@@ -35,6 +36,11 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
             <SearchUser userObj={userObj} />
           </LoggedInLayout>
         </Route>
+        <Route path='/notification'>
+          <LoggedInLayout screenName='notification' userObj={userObj}>
+            <Notification userObj={userObj} />
+          </LoggedInLayout>
+        </Route>
         <Route path='/comment/:id/'>
           <LoggedInLayout userObj={userObj}>
             <Comment userObj={userObj} />
@@ -43,6 +49,13 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
         <Route path='/uploads'>
           <LoggedInLayout userObj={userObj}>
             <Uploads userObj={userObj} />
+          </LoggedInLayout>
+        </Route>
+        <Route>
+          <LoggedInLayout userObj={userObj}>
+            <main style={{ width: "100%", height: "100vh" }} className='column'>
+              You Are Lost!!
+            </main>
           </LoggedInLayout>
         </Route>
       </Switch>
