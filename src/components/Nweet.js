@@ -31,6 +31,7 @@ import {
 } from "react-share";
 import styled, { keyframes } from "styled-components";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -319,14 +320,17 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
         <div className='main_feed'>
           <div className='column'>
             {/* happy sad soso funny shocked angry */}
-            <LazyImageLoading
-              className='avatar'
-              image={
-                avatar != ""
-                  ? avatar
-                  : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
-              }
-            />
+            <Link to={`/profile/${nweetObj.creatorId}`}>
+              <LazyImageLoading
+                className='avatar'
+                image={
+                  avatar != ""
+                    ? avatar
+                    : `https://avatars.dicebear.com/api/croodles-neutral/:${nweetObj.creatorId}.svg`
+                }
+              />
+            </Link>
+
             {nweetObj.emotion === "sad" ? (
               <SadMessage>
                 <svg
@@ -386,7 +390,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
               </SadMessage>
             ) : nweetObj.emotion === "happy" ? (
               <HappyMessage>
-                <img src='./sun.svg' />
+                <img src={`https://expremotion.netlify.app/sun.svg`} />
               </HappyMessage>
             ) : nweetObj.emotion === "angry" ? (
               <LottiePlayer>
@@ -451,7 +455,9 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
           <div className='main_content'>
             <div className='feed_header'>
               <div className='user_info'>
-                <span className='username'>{nweetObj.username}</span>
+                <Link to={`/profile/${nweetObj.creatorId}`}>
+                  <span className='username'>{nweetObj.username}</span>
+                </Link>
                 {/* <span className=''>·</span> */}
                 <h4 className='date'>{createdAt}</h4>
               </div>

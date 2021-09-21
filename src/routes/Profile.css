@@ -85,3 +85,14 @@
   background: var(--main-red);
   color: var(--white);
 }
+
+.feeds {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 780px;
+  margin-bottom: 150px;
+}
+.feeds h1 {
+  font-size: 20px;
+  font-weight: 600;
+}

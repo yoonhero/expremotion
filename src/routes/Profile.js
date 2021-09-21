@@ -11,16 +11,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import LazyImageLoading from "../components/LazyImageLoading";
 import { useParams } from "react-router";
+import Nweet from "../components/Nweet";
+import UserRow from "../components/UserRow";
 
 export default ({ refreshUser, userObj }) => {
   const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [attachment, setAttachment] = useState("");
   const [isMe, setIsMe] = useState(false);
-  const [user, setUser] = useState([]);
+  const [username, setUsername] = useState("");
+  const [userFeed, setUserFeed] = useState([]);
   const { uid } = useParams();
 
-  useEffect(() => {
+  useEffect(async () => {
     // dbService
     //   .collection("profile")
     //   .doc(userObj.uid)
@@ -32,24 +35,52 @@ export default ({ refreshUser, userObj }) => {
     //     }
     //   });
 
-    realtimeDatabase.ref("users/" + uid).once("value", function (snapshot) {
-      let userData = snapshot.val();
-      setIsMe(uid === userData.uid);
-      setUser(userData);
-      snapshot.forEach(function (childSnapshot) {
-        var childKey = childSnapshot.key;
-        var childData = childSnapshot.val();
-        if (childKey === "avatar") {
-          setAttachment(childData);
-        }
+    await realtimeDatabase
+      .ref("users/" + uid)
+      .once("value", function (snapshot) {
+        let userData = snapshot.val();
+        setIsMe(uid === userData.uid);
+        setUsername(userData.username);
+        snapshot.forEach(function (childSnapshot) {
+          var childKey = childSnapshot.key;
+          var childData = childSnapshot.val();
+          if (childKey === "avatar") {
+            setAttachment(childData);
+          }
+        });
       });
-    });
-  }, []);
 
-  useEffect(() => {
-    console.log(user);
-    console.log(isMe);
-  }, [user]);
+    // my feeds
+    await dbService
+      .collection(uid)
+      .orderBy("createdAt", "desc")
+      .onSnapshot((snapshot) => {
+        const feedArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUserFeed((followNweet) => {
+          let allNweets = [...feedArray];
+          let sorted = allNweets.sort(function (a, b) {
+            return b.createdAt - a.createdAt;
+          });
+          // let uniqueArray = sorted.filter(function (item, pos) {
+          //   return sorted.indexOf(item) == pos;
+          // });
+
+          let uniqueArr = [];
+          let unq = [];
+          sorted.forEach((element) => {
+            if (!uniqueArr.includes(element.id)) {
+              uniqueArr.push(element.id);
+              unq.push(element);
+            }
+          });
+          console.log(unq);
+          return unq;
+        });
+      });
+  }, []);
 
   const onLogOutClick = () => {
     authService.signOut();
@@ -67,6 +98,7 @@ export default ({ refreshUser, userObj }) => {
       await userObj.updateProfile({
         displayName: newDisplayName,
       });
+
       refreshUser();
     }
     let attachmentUrl = "";
@@ -106,6 +138,24 @@ export default ({ refreshUser, userObj }) => {
   };
 
   const onClearAttachment = () => setAttachment(null);
+
+  const getFollowing = async () => {
+    let follow = {};
+    await realtimeDatabase
+      .ref("users/" + uid)
+      .once("value", function (snapshot) {
+        let userData = snapshot.val();
+        follow = userData.follow;
+      });
+    return follow.map(async (follow) => {
+      await realtimeDatabase
+        .ref("users/" + follow)
+        .once("value", function (snapshot) {
+          let userData = snapshot.val();
+          return <UserRow {...userData} userObj={userObj} />;
+        });
+    });
+  };
 
   return (
     <div className='profileContainer column'>
@@ -155,6 +205,21 @@ export default ({ refreshUser, userObj }) => {
       <button onClick={onLogOutClick} className='logOut'>
         <FontAwesomeIcon icon={faSignOutAlt} />
       </button>
+
+      <div className='following column'>{getFollowing()}</div>
+
+      <div className='feeds column'>
+        <h1>{username}'s feed</h1>
+        {userFeed.length !== 0 &&
+          userFeed.map((feed) => (
+            <Nweet
+              key={feed.id}
+              nweetObj={feed}
+              isOwner={isMe}
+              userObj={userObj}
+            />
+          ))}
+      </div>
     </div>
   );
 };

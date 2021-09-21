@@ -3,6 +3,7 @@ import { realtimeDatabase } from "../fbase";
 import { useHistory } from "react-router-dom";
 import "./UserRow.css";
 import LazyImageLoading from "./LazyImageLoading";
+import { Link } from "react-router-dom";
 
 const UserRow = ({ uid, avatar, username, userObj }) => {
   const [follows, setFollows] = useState(false);
@@ -64,15 +65,19 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
   return (
     <div className='user_row' key={uid}>
       <div className='row'>
-        <LazyImageLoading
-          className='avatar'
-          image={
-            avatar != undefined
-              ? avatar
-              : `https://avatars.dicebear.com/api/croodles-neutral/:${username}.svg`
-          }
-        />
-        <div className='username'>{username}</div>
+        <Link to={`/profile/${uid}`}>
+          <LazyImageLoading
+            className='avatar'
+            image={
+              avatar != undefined
+                ? avatar
+                : `https://avatars.dicebear.com/api/croodles-neutral/:${username}.svg`
+            }
+          />
+        </Link>
+        <Link to={`/profile/${uid}`}>
+          <div className='username'>{username}</div>
+        </Link>
       </div>
       {!isMe ? (
         <button
