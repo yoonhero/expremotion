@@ -36,11 +36,11 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
             <SearchUser userObj={userObj} />
           </LoggedInLayout>
         </Route>
-        <Route path='/notification'>
+        {/* <Route path='/notification'>
           <LoggedInLayout screenName='notification' userObj={userObj}>
             <Notification userObj={userObj} />
           </LoggedInLayout>
-        </Route>
+        </Route> */}
         <Route path='/comment/:id/'>
           <LoggedInLayout userObj={userObj}>
             <Comment userObj={userObj} />

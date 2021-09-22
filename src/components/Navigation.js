@@ -36,9 +36,9 @@ const Navigation = ({ screenName, userObj }) => {
             </div>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to='/notification'>
-            {/* <span>Search</span> */}
+
             <div className='column nav-items-li'>
               <span>
                 <FontAwesomeIcon icon={faHeart} size='lg' />
@@ -46,7 +46,7 @@ const Navigation = ({ screenName, userObj }) => {
               {screenName === "notification" && <div className='dot'></div>}
             </div>
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link to={`/profile/${userObj?.uid}`} class=''>
             {/* <span>
