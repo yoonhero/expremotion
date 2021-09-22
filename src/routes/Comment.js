@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { Header } from "../components/Header";
 import { realtimeDatabase } from "../fbase";
 import "./Comment.css";
+import { NewNotif } from "./Notification";
 
 const Comment = ({ userObj }) => {
   const [reply, setReply] = useState();
@@ -29,6 +30,11 @@ const Comment = ({ userObj }) => {
       .ref(`reply/${id}`)
       .update([...reply, newReplyObject]);
     setNewReply("");
+    NewNotif(
+      userObj.displayName,
+      `${userObj.displayName} comments your Feed`,
+      userObj.uid
+    );
   };
 
   useEffect(async () => {

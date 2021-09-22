@@ -15,7 +15,7 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
     <Router>
       <Switch>
         {!isLoggedIn && (
-          <Route exact path='/'>
+          <Route>
             <LoggedOutLayout>
               <Auth />
             </LoggedOutLayout>

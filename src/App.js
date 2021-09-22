@@ -12,13 +12,13 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUserObj({
-          displayName: user.displayName ? user.displayName : user.email,
+          displayName: user.displayName ? user.displayName : "Anonymous",
           uid: user.uid,
           updateProfile: (args) => user.updateProfile(args),
         });
 
         realtimeDatabase.ref("users/" + user.uid).update({
-          username: user.displayName ? user.displayName : user.email,
+          username: user.displayName ? user.displayName : "Anonymous",
           email: user.email,
           uid: user.uid,
         });
@@ -38,7 +38,7 @@ function App() {
     });
 
     realtimeDatabase.ref("users/" + user.uid).update({
-      username: user.displayName ? user.displayName : user.email,
+      username: user.displayName ? user.displayName : "Anonymous",
       email: user.email,
       uid: user.uid,
     });
