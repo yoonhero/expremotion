@@ -15,11 +15,7 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
     <Router>
       <Switch>
         {!isLoggedIn && (
-<<<<<<< HEAD
-          <Route>
-=======
           <Route path='/'>
->>>>>>> b7141442e99e776c1f69472a44d36f6c8d81755c
             <LoggedOutLayout>
               <Auth />
             </LoggedOutLayout>
