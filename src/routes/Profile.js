@@ -24,6 +24,10 @@ export default ({ refreshUser, userObj }) => {
   const { uid } = useParams();
   const [isEditing, setIsEditing] = useState(false);
 
+  useEffect(() => {
+    console.log(username, attachment);
+  }, [username, attachment]);
+
   useEffect(async () => {
     // dbService
     //   .collection("profile")
@@ -40,15 +44,17 @@ export default ({ refreshUser, userObj }) => {
       .ref("users/" + uid)
       .once("value", function (snapshot) {
         let userData = snapshot.val();
-        setIsMe(uid === userData.uid);
+        console.log(userData);
+        setIsMe(userObj.uid === userData.uid);
         setUsername(userData.username);
-        snapshot.forEach(function (childSnapshot) {
-          var childKey = childSnapshot.key;
-          var childData = childSnapshot.val();
-          if (childKey === "avatar") {
-            setAttachment(childData);
-          }
-        });
+        setAttachment(userData.avatar);
+        // snapshot.forEach(function (childSnapshot) {
+        //   var childKey = childSnapshot.key;
+        //   var childData = childSnapshot.val();
+        //   if (childKey === "avatar") {
+        //     setAttachment(childData);
+        //   }
+        // });
       });
 
     // my feeds

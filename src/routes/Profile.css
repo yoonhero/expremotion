@@ -31,6 +31,12 @@
 .profile_avatar {
   width: 120px;
   height: 120px;
+  min-width: 100px;
+  min-height: 100px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   background-position: cover;
   border: 1px solid var(--main-border);
@@ -153,14 +159,18 @@
   width: 100%;
   max-width: 780px;
   padding: 10px;
+  margin: 10px;
   margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 14px 14px 28px #d0d0d0, -14px -14px 28px #f0f0f0;
+  border: 3px solid var(--main-border);
 }
 
 .top_column {
   width: 100%;
   padding: 10px;
   justify-content: space-between !important;
-  background: linear-gradient(0deg, transparent 20%, #fff1e6 80%);
+  /* background: linear-gradient(0deg, transparent 20%, #fff1e6 80%); */
 }
 
 .user_info_container {
