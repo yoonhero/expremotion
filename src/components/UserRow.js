@@ -24,7 +24,7 @@ const UserRow = ({ uid, avatar, username, userObj }) => {
   };
 
   const goToProfile = () => {
-    history.push("/profile");
+    history.push(`/profile/${uid}`);
   };
 
   useEffect(async () => {
