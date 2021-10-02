@@ -24,18 +24,23 @@ const Auth = () => {
   };
 
   return (
-    <div className='authContainer column'>
-      {/* <img src='./happy.png' /> */}
-      <h1 class='authTitle'>Expremotion</h1>
-      <AuthForm />
-      <div>
-        <div className='authBtns'>
-          <button onClick={onSocialClick} name='google' className='authBtn'>
-            <FontAwesomeIcon icon={faGoogle} />
-          </button>
-          <button onClick={onSocialClick} name='github' className='authBtn'>
-            <FontAwesomeIcon icon={faGithub} />
-          </button>
+    <div className='auth'>
+      <div className='auth_img column'>
+        <img src='https://thumbs.gfycat.com/RawShoddyIsopod-size_restricted.gif' />
+      </div>
+      <div className='authContainer column'>
+        {/* <img src='./happy.png' /> */}
+        <h1 class='authTitle'>Expremotion</h1>
+        <AuthForm />
+        <div>
+          <div className='authBtns'>
+            <button onClick={onSocialClick} name='google' className='authBtn'>
+              <FontAwesomeIcon icon={faGoogle} />
+            </button>
+            <button onClick={onSocialClick} name='github' className='authBtn'>
+              <FontAwesomeIcon icon={faGithub} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
